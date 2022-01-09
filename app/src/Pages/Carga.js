@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SNavigation, SPage, SThread, SView } from 'servisofts-component';
+import { SHr, SIcon, SNavigation, SPage, SText, SThread, SView } from 'servisofts-component';
+import TD from './TD';
 
 class Carga extends Component {
     constructor(props) {
@@ -27,10 +28,7 @@ class Carga extends Component {
         // this.hilo()
         return (
             <SPage hidden disableScroll center>
-                <SHr height={32} />
-                <SView col={"xs-9 sm-7 md-5 lg-4 xl-3"} height={200}>
-                    <SIcon name={"Servisofts"} />
-                </SView>
+                <TD/>
             </SPage>
         );
     }
