@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script src="https://threejs.org/build/three.js"></script>
-		<script>
-			const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-			const renderer = new THREE.WebGLRenderer({ alpha: true });
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+<head>
+	<meta charset="utf-8">
+	<title>My first three.js app</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+</head>
 
-			const geometry = new THREE.BoxGeometry();
-			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+<body>
+	<script src="https://threejs.org/build/three.js"></script>
+	<script>
+	
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-			const cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
+		const renderer = new THREE.WebGLRenderer({ alpha: true });
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
 
-			camera.position.z = 5;
+		const geometry = new THREE.BoxGeometry();
+		const material = new THREE.MeshBasicMaterial({ color: 0x0df0d0 });
+		const material2 = new THREE.MeshBasicMaterial({ color: 0xfff0d0 });
 
-			function animate() {
-				requestAnimationFrame( animate );
+		const cube = new THREE.Mesh(geometry, material);
+		scene.add(cube);
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+	
+		camera.position.z = 5;
+		var clock = new THREE.Clock();
+		var speed = 2; //units a second
+		var delta = 0;
+		var time = 0;
+		function animate() {
+			requestAnimationFrame(animate);
+			cube.rotation.x += 0.01;
+			cube.rotation.y += 0.01;
+		
+			// send({ time: time })
+			// send({ delta: delta })
+			// cube.position.z += speed * delta;
+			renderer.render(scene, camera);
+		};
 
-				renderer.render( scene, camera );
-			};
+		animate();
+	
+	</script>
 
-			animate();
-		</script>
-	</body>
+</body>
+
 </html>

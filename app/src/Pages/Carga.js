@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SNavigation, SPage, SText, SThread, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SNavigation, SPage, SText, SThread, SView } from 'servisofts-component';
 import TD from './TD';
 
 class Carga extends Component {
@@ -27,8 +27,18 @@ class Carga extends Component {
     render() {
         // this.hilo()
         return (
-            <SPage hidden disableScroll center>
-                <TD/>
+            <SPage hidden disableScroll center >
+
+                <SView style={{
+                    position: "absolute",
+                }} col={"xs-12"} height>
+                    <TD ref={(ref) => { this.td = ref }} />
+                </SView>
+                <SView col={'xs-12'}>
+                    <SButtom type='danger' onPress={() => {
+                        this.td.send({ component: "test" })
+                    }}>VER</SButtom>
+                </SView>
             </SPage>
         );
     }
