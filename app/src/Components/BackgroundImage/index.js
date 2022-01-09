@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { SGradient, SIcon, SImage } from 'servisofts-component';
+
 type type = {
     source: Object,
     contraste: String
-
 }
 export default class BackgroundImage extends Component<type> {
     constructor(props) {
@@ -25,6 +25,7 @@ export default class BackgroundImage extends Component<type> {
             ...this.props.style,
         }}>
             <SIcon name={"Bg1"} />
+            
         </View>
     }
     render() {

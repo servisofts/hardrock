@@ -29,6 +29,7 @@ class Carga extends Component {
             <SPage hidden disableScroll center>
                 <SHr height={32} />
                 <SView col={"xs-9 sm-7 md-5 lg-4 xl-3"} height={200}>
+                
                     <SIcon name={"Servisofts"} />
                 </SView>
             </SPage>
