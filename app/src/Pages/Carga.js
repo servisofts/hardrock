@@ -35,14 +35,14 @@ class Carga extends Component {
                 }} col={"xs-12"} height>
                     <SThree ref={(ref) => { this.td = ref }} />
                 </SView>
-                <SView style={{
+                {/* <SView style={{
                     position: "absolute",
                     left: 0,
                 }}>
                     <SButtom type='danger' onPress={() => {
                         this.td.send({ component: "test" })
                     }}>VER</SButtom>
-                </SView>
+                </SView> */}
             </SPage>
         );
     }

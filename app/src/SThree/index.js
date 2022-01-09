@@ -23,6 +23,7 @@ export default class SThree extends Component {
                     originWhitelist={['*']}
                     source={require("../Components/Gltf/index.html")}
                     javaScriptEnabled={true}
+                    scrollEnabled={false}
                     // injectedJavaScript={require("./funcions.wbjs").default}
                     onLoadEnd={() => {
                         // this.send({
