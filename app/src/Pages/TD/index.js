@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { WebView } from 'react-native-webview'
 import { renderToString } from 'react-dom/server'
 import { SText, SView } from 'servisofts-component';
-import Web from './Web';
+import Web, { JavaScript } from './Web';
 
 export default class TD extends Component {
     constructor(props) {
