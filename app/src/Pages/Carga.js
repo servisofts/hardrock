@@ -34,7 +34,10 @@ class Carga extends Component {
                 }} col={"xs-12"} height>
                     <TD ref={(ref) => { this.td = ref }} />
                 </SView>
-                <SView col={'xs-12'}>
+                <SView style={{
+                    position: "absolute",
+                    left: 0,
+                }}>
                     <SButtom type='danger' onPress={() => {
                         this.td.send({ component: "test" })
                     }}>VER</SButtom>
