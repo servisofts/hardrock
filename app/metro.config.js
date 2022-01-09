@@ -16,7 +16,7 @@ module.exports = (async () => {
   } = await getDefaultConfig();
 
   assetExts.push("pem");
-  // assetExts.push("wbjs");
+  assetExts.push("gltf");
   return {
     transformer: {
       babelTransformerPath: require.resolve("react-native-svg-transformer"),
@@ -29,7 +29,7 @@ module.exports = (async () => {
     },
     watchFolders: [
     //  path.resolve(__dirname, 'C:\\servisofts\\dist')
-       path.resolve(__dirname, '../../servisofts-component/dist'),
+      //  path.resolve(__dirname, '../../servisofts-component/dist'),
     ],
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),

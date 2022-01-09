@@ -53,7 +53,7 @@
         scene.add(light);
         
         var loader = new THREE.GLTFLoader();
-        await loader.load('models/blend/dona.gltf', ( gltf ) => {
+        await loader.load('./models/blend/dona.gltf', ( gltf ) => {
             scene.add( gltf.scene );
         } );
 
