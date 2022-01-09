@@ -16,6 +16,7 @@ module.exports = (async () => {
   } = await getDefaultConfig();
 
   assetExts.push("pem");
+  // assetExts.push("wbjs");
   return {
     transformer: {
       babelTransformerPath: require.resolve("react-native-svg-transformer"),
