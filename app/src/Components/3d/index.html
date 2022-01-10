@@ -29,8 +29,11 @@
         camera.rotation.z = 0;
 
 
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        const renderer = new THREE.WebGLRenderer({ antialias:true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.outputEnconding = THREE.sRGBEncoding;
+        renderer.physicallyCorrectLights = false;
+
         document.body.appendChild(renderer.domElement);
 
         
@@ -40,16 +43,45 @@
         raycaster.setFromCamera(mouse, camera);
 
         const scene = new THREE.Scene();
-        var light = new THREE.AmbientLight(0xFFFFFF, 0.85);
+        const light = new THREE.PointLight( 0xffffff, 1, 100 );
+        light.position.set( 10, 15, 20 );
+        light.rotation.set( 0.5, 0.5, 0.5 );
         scene.add(light);
+
+        const glowline = new WHS.GlowLine({
+            geometry: {
+                radius: 0.1,
+                delta: 0.2,
+                curveDetail: 64,
+                curve: new THREE.CubicBezierCurve3(
+                new THREE.Vector3( -10, 0, 0 ),
+                new THREE.Vector3( -5, 15, 0 ),
+                new THREE.Vector3( 20, 15, 0 ),
+                new THREE.Vector3( 10, 0, 0 )
+                )
+            },
+
+            glow: {
+                normalIntensity: 70,
+                cameraIntensity: 0
+            }
+        });
+
+        glowline.addTo(scene);
+
 
         var loader = new THREE.GLTFLoader();
         var guitarra;
-        loader.load('../../Assets/3d/guitarra.gltf', (gltf) => {
+        loader.load('../../Assets/3d/hr.gltf', (gltf) => {
             guitarra = gltf.scene;
-            guitarra.position.y = 10;
-            scene.add(guitarra);
+            guitarra.position.y = 20;
+            guitarra.scale.y += 10;
+            guitarra.scale.x += 10;
+            guitarra.scale.z += 10;
+            glowscene.add(guitarra);
         });
+
+        scene.add( glowscene );
 
         loader = new THREE.GLTFLoader();
         loader.load('../../Assets/3d/tablero.gltf', (gltf) => {
@@ -74,7 +106,9 @@
             if(camera.rotation.y > 0){
                 camera.rotation.y -= 0.0061;
             }
-            if(guitarra) guitarra.rotation.y += 0.05;
+
+
+            if(guitarra) guitarra.rotation.y += 0.02;
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
         };
