@@ -17,6 +17,8 @@ module.exports = (async () => {
 
   assetExts.push("pem");
   assetExts.push("gltf");
+  // sourceExts.push("html");
+  // assetExts.push("html");
   return {
     transformer: {
       babelTransformerPath: require.resolve("react-native-svg-transformer"),
@@ -32,7 +34,7 @@ module.exports = (async () => {
       //  path.resolve(__dirname, '../../servisofts-component/dist'),
     ],
     resolver: {
-      assetExts: assetExts.filter(ext => ext !== "svg"),
+      assetExts: assetExts.filter(ext =>( ext !== "svg" )),
       sourceExts: [...sourceExts, "svg",],
       extraNodeModules: new Proxy(
         {},
