@@ -7,7 +7,7 @@ type type = {
     contraste: String
 }
 
-export default class BackgroundImage extends Component<type> {
+export default class Gltf extends Component<type> {
     constructor(props) {
         super(props);
         this.state = {

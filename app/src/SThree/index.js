@@ -21,7 +21,7 @@ export default class SThree extends Component {
                     }}
                     style={{ width: "100%", backgroundColor: 'transparent', }}
                     originWhitelist={['*']}
-                    source={require("../Components/Gltf/index.html")}
+                    source={require("../Components/3d/index.html")}
                     javaScriptEnabled={true}
                     scrollEnabled={false}
                     // injectedJavaScript={require("./funcions.wbjs").default}
