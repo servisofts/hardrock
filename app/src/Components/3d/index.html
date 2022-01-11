@@ -82,12 +82,12 @@
             scene.add(guitarra);
         });
 
-        // new THREE.RGBELoader().load("../../Assets/hdr/2.hdr", function (texture) {
-        //     texture.mapping = THREE.EquirectangularReflectionMapping;
-        //     scene.background = texture;
-        //     scene.environment = texture;
-        //     //  animate()
-        // });
+        new THREE.RGBELoader().load("../../Assets/hdr/2.hdr", function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.background = texture;
+            scene.environment = texture;
+            //  animate()
+        });
 
         // loader = new THREE.GLTFLoader();
         // var tablero;
@@ -101,29 +101,36 @@
         //     // tablero.scale.z += 10;
         //     // scene.add(tablero);
         // });
+     
+
+        const clock = new THREE.Clock();
+        var delta = 0;
+
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.addEventListener('change', animate); // use if there is no animation loop
         controls.minDistance = 20;
         controls.maxDistance = 100;
         controls.target.set(0, 0, - 0.2);
+        controls.staticMoving = true;
+        controls.panSpeed = 4;
         controls.update();
 
-        const clock = new THREE.Clock();
+        
         function animate() {
-            requestAnimationFrame(animate);
+
+            // requestAnimationFrame(animate);
+
             // raycaster.setFromCamera(mouse, camera);
             // animCamera();
-            // if (guitarra) guitarra.rotation.y += 1 * clock.getDelta();
+            delta = clock.getDelta();
+            // const hasControlsUpdated = controls.update(delta);
+            // if (guitarra) guitarra.rotation.y += 1 * delta;
             // if (guitarra) guitarra.rotation.x -= 0.001 * clock.getDelta();
             // if (guitarra) guitarra.rotation.z += 0.2 * clock.getDelta();;
 
-            render();
-
-        };
-        function render() {
             renderer.render(scene, camera);
+        };
 
-        }
         function addHDR() {
 
         }
@@ -169,8 +176,8 @@
         // }
 
         // document.addEventListener('mousedown', onDocumentMouseDown, false);
-
-        animate();
+        renderer.setAnimationLoop(animate);
+        // animate();
     </script>
 </body>
 
