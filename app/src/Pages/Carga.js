@@ -35,14 +35,24 @@ class Carga extends Component {
                 }} col={"xs-12"} height>
                     <SThree ref={(ref) => { this.td = ref }} />
                 </SView>
-                {/* <SView style={{
+                <SView row style={{
                     position: "absolute",
-                    // left: 0,
+                    bottom: 8,
                 }}>
+                    <SButtom type='outline' style={{
+                        opacity: 0.5,
+                    }} onPress={() => {
+                        this.td.send({ component: "test" })
+                    }}>VER</SButtom>
+                    <SView width={8} />
                     <SButtom type='danger' onPress={() => {
                         this.td.send({ component: "test" })
                     }}>VER</SButtom>
-                </SView> */}
+                    <SView width={8} />
+                    <SButtom type='danger' onPress={() => {
+                        this.td.send({ component: "test" })
+                    }}>VER</SButtom>
+                </SView>
             </SPage>
         );
     }
