@@ -37,7 +37,7 @@ class Carga extends Component {
                 </SView>
                 {/* <SView style={{
                     position: "absolute",
-                    left: 0,
+                    // left: 0,
                 }}>
                     <SButtom type='danger' onPress={() => {
                         this.td.send({ component: "test" })

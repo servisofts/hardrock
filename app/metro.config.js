@@ -17,6 +17,7 @@ module.exports = (async () => {
 
   assetExts.push("pem");
   assetExts.push("gltf");
+  assetExts.push("hdr");
   // sourceExts.push("html");
   // assetExts.push("html");
   return {
