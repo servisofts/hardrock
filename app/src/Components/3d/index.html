@@ -101,7 +101,7 @@
         //     // tablero.scale.z += 10;
         //     // scene.add(tablero);
         // });
-     
+
 
         const clock = new THREE.Clock();
         var delta = 0;
@@ -115,7 +115,7 @@
         // controls.panSpeed = 4;
         controls.update();
 
-        
+
         function animate() {
 
             // requestAnimationFrame(animate);
@@ -176,6 +176,14 @@
         // }
 
         // document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        document.addEventListener('resize', onWindowResize, false);
         renderer.setAnimationLoop(animate);
         // animate();
     </script>
