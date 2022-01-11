@@ -41,15 +41,11 @@
         // camera.rotation.z = 0.4;
         // camera.rotation.y = 1.2799999999999736;
         // camera.rotation.z = 0;
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.addEventListener('change', animate); // use if there is no animation loop
-        controls.minDistance = 20;
-        controls.maxDistance = 100;
-        controls.target.set(0, 0, - 0.2);
 
-        var mouse = new THREE.Vector2();
-        var raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera(mouse, camera);
+
+        // var mouse = new THREE.Vector2();
+        // var raycaster = new THREE.Raycaster();
+        // raycaster.setFromCamera(mouse, camera);
 
         const size = 200;
         const divisions = 200;
@@ -78,8 +74,8 @@
             // guitarra.rotation.x = -10 * Math.PI / 180;
             // guitarra.rotation.z = -10*Math.PI/180;
             // guitarra.rotation.y = 20 * Math.PI / 180;
-            guitarra.castShadow = true; //default is false
-            guitarra.receiveShadow = false;
+            // guitarra.castShadow = true; //default is false
+            // guitarra.receiveShadow = false;
             guitarra.scale.y += 10;
             guitarra.scale.x += 10;
             guitarra.scale.z += 10;
@@ -105,21 +101,29 @@
         //     // tablero.scale.z += 10;
         //     // scene.add(tablero);
         // });
-
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.addEventListener('change', animate); // use if there is no animation loop
+        controls.minDistance = 20;
+        controls.maxDistance = 100;
+        controls.target.set(0, 0, - 0.2);
+        controls.update();
 
         const clock = new THREE.Clock();
         function animate() {
-            raycaster.setFromCamera(mouse, camera);
+            requestAnimationFrame(animate);
+            // raycaster.setFromCamera(mouse, camera);
             // animCamera();
             // if (guitarra) guitarra.rotation.y += 1 * clock.getDelta();
             // if (guitarra) guitarra.rotation.x -= 0.001 * clock.getDelta();
             // if (guitarra) guitarra.rotation.z += 0.2 * clock.getDelta();;
-            // controls.update();
 
-            requestAnimationFrame(animate);
+            render();
 
-            renderer.render(scene, camera);
         };
+        function render() {
+            renderer.render(scene, camera);
+
+        }
         function addHDR() {
 
         }
@@ -143,10 +147,10 @@
                 camera.rotation.y -= 0.0061;
             }
         }
-        function onMouseMove(event) {
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-        }
+        // function onMouseMove(event) {
+        //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        //     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        // }
 
 
         function randomBetween(min, max) {
@@ -154,17 +158,17 @@
         }
 
 
-        function onDocumentMouseDown(event) {
-            event.preventDefault();
+        // function onDocumentMouseDown(event) {
+        //     event.preventDefault();
 
-            var intersects = raycaster.intersectObjects(scene.children);
-            console.log(intersects);
-            if (intersects.length > 0) {
+        //     var intersects = raycaster.intersectObjects(scene.children);
+        //     console.log(intersects);
+        //     if (intersects.length > 0) {
 
-            }
-        }
+        //     }
+        // }
 
-        document.addEventListener('mousedown', onDocumentMouseDown, false);
+        // document.addEventListener('mousedown', onDocumentMouseDown, false);
 
         animate();
     </script>
