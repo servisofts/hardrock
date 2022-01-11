@@ -60,7 +60,7 @@
         addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
         addPointLight({ x: 10, y: 10, z: -10, intensity: 7, color: 0Xff00ff });
         addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
-        addPointLight({ x: 0, y: -10, z: 30, intensity: 4, color: 0Xffffff });
+        // addPointLight({ x: 0, y: -10, z: 30, intensity: 4, color: 0Xffffff });
         addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
 
@@ -82,7 +82,7 @@
             scene.add(guitarra);
         });
 
-        new THREE.RGBELoader().load("../../Assets/hdr/2.hdr", function (texture) {
+        new THREE.RGBELoader().load("../../Assets/hdr/3.hdr", function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             scene.background = texture;
             scene.environment = texture;
@@ -101,7 +101,7 @@
         //     // tablero.scale.z += 10;
         //     // scene.add(tablero);
         // });
-     
+
 
         const clock = new THREE.Clock();
         var delta = 0;
@@ -111,11 +111,11 @@
         controls.minDistance = 20;
         controls.maxDistance = 100;
         controls.target.set(0, 0, - 0.2);
-        controls.staticMoving = true;
-        controls.panSpeed = 4;
+        // controls.staticMoving = true;
+        // controls.panSpeed = 4;
         controls.update();
 
-        
+
         function animate() {
 
             // requestAnimationFrame(animate);
@@ -176,6 +176,14 @@
         // }
 
         // document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        document.addEventListener('resize', onWindowResize, false);
         renderer.setAnimationLoop(animate);
         // animate();
     </script>
