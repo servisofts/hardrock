@@ -10,6 +10,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		490F8566278D331100901CD2 /* Web.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 490F8565278D331100901CD2 /* Web.bundle */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		85DC4C6561CEDC15BD4C27E8 /* libPods-hardrock_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F0D055081F029C2FCAD5D1 /* libPods-hardrock_app.a */; };
 /* End PBXBuildFile section */
@@ -25,6 +26,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hardrock_app/main.m; sourceTree = "<group>"; };
 		19694007EB853EC42C17FF8D /* libPods-hardrock_app-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hardrock_app-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46F0D055081F029C2FCAD5D1 /* libPods-hardrock_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hardrock_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		490F8565278D331100901CD2 /* Web.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Web.bundle; path = ../html/Web.bundle; sourceTree = "<group>"; };
 		50AE628FD6660FE7B65A258E /* Pods-hardrock_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hardrock_app.release.xcconfig"; path = "Target Support Files/Pods-hardrock_app/Pods-hardrock_app.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hardrock_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F052C82BD49621EFFE245A7 /* Pods-hardrock_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hardrock_app.debug.xcconfig"; path = "Target Support Files/Pods-hardrock_app/Pods-hardrock_app.debug.xcconfig"; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 		13B07FAE1A68108700A75B9A /* hardrock_app */ = {
 			isa = PBXGroup;
 			children = (
+				490F8565278D331100901CD2 /* Web.bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490F8566278D331100901CD2 /* Web.bundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

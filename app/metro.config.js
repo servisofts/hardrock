@@ -18,6 +18,7 @@ module.exports = (async () => {
   assetExts.push("pem");
   assetExts.push("gltf");
   assetExts.push("hdr");
+  assetExts.push("glb");
   // sourceExts.push("html");
   // assetExts.push("html");
   return {
@@ -33,6 +34,7 @@ module.exports = (async () => {
     watchFolders: [
     //  path.resolve(__dirname, 'C:\\servisofts\\dist')
       //  path.resolve(__dirname, '../../servisofts-component/dist'),
+      //  path.resolve(__dirname, '../render/dist'),
     ],
     resolver: {
       assetExts: assetExts.filter(ext =>( ext !== "svg" )),

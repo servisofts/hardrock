@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { SButtom, SHr, SIcon, SNavigation, SPage, SText, SThread, SView } from 'servisofts-component';
-import SThree from '../SThree';
-import TD from './TD';
+// import SThree from '../SThree';
+// import TD from './TD';
+// import fs from 'react-native-fs';
+import DWV from '../DWV';
 
 class Carga extends Component {
     constructor(props) {
@@ -25,6 +27,7 @@ class Carga extends Component {
             this.redirect();
         });
     }
+
     render() {
         // this.hilo()
         return (
@@ -33,24 +36,26 @@ class Carga extends Component {
                 <SView style={{
                     position: "absolute",
                 }} col={"xs-12"} height>
-                    <SThree ref={(ref) => { this.td = ref }} />
+                    {/* <SThree ref={(ref) => { this.td = ref }} /> */}
+                    <DWV />
                 </SView>
-                <SView row style={{
+                <SView row col={"xs-12"} center style={{
                     position: "absolute",
                     bottom: 8,
                 }}>
                     <SButtom type='outline' style={{
                         opacity: 0.5,
                     }} onPress={() => {
-                        this.td.send({ component: "test" })
-                    }}>VER</SButtom>
+                        // this.getFs();
+                    }}>FS</SButtom>
+                    <SView width={8} />
+                    <SButtom type='danger' onPress={() => {
+                        // this.getls();
+                    }}>LS</SButtom>
                     <SView width={8} />
                     <SButtom type='danger' onPress={() => {
                         this.td.send({ component: "test" })
-                    }}>VER</SButtom>
-                    <SView width={8} />
-                    <SButtom type='danger' onPress={() => {
-                        this.td.send({ component: "test" })
+                        // this.writeFile();
                     }}>VER</SButtom>
                 </SView>
             </SPage>
