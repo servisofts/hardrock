@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 // import hdr from '../../assets/hdr/3.hdr';
-import GuitarraJson from "./hr.json"
+import GuitarraJson from "../Guitarra/hr.json";
 export default class Guitarra extends Component {
     componentDidMount() {
         this.INSTANCE = this;
@@ -24,7 +24,7 @@ export default class Guitarra extends Component {
         // this.scene.add(gridHelper);
 
         this.createGuitarra();
-        this.createHDR();
+        // this.createHDR();
 
         // this.animate();
         const animate = () => {
@@ -52,7 +52,8 @@ export default class Guitarra extends Component {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
-        document.body.appendChild(this.renderer.domElement);
+        document.getElementById("three").appendChild(this.renderer.domElement);
+        // document.body.appendChild(this.renderer.domElement);
 
     }
 
@@ -69,7 +70,7 @@ export default class Guitarra extends Component {
     }
     createHDR() {
         const INSTANCE = this;
-        new RGBELoader().load("http://192.168.3.2:8081/src/DWV/web/assets/hdr/3.hdr", function (texture) {
+        new RGBELoader().load("./assets/hdr/3.hdr", function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             INSTANCE.scene.background = texture;
             INSTANCE.scene.environment = texture;
@@ -82,8 +83,8 @@ export default class Guitarra extends Component {
         var guitarra;
         const INSTANCE = this;
         const loader = new GLTFLoader();
-        loader.parse(JSON.stringify(GuitarraJson),'', function (gltf) {
-        // loader.load("./assets/hr.gltf", function (gltf) {
+        loader.parse(JSON.stringify(GuitarraJson), '', function (gltf) {
+            // loader.load("./assets/hr.gltf", function (gltf) {
             // console.log("exito load");
             const guitarra = gltf.scene;
             guitarra.scale.y += 10;
@@ -105,10 +106,10 @@ export default class Guitarra extends Component {
         this.scene.add(pointLight);
 
     }
- 
+
     render() {
         return (
-            <div />
+            <div id="three" />
         )
     }
 }
