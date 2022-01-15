@@ -16,7 +16,7 @@ export default class Guitarra extends Component {
         this.scene.add(lightAmbiental);
         this.addPointLight({ x: -10, y: 10, z: -10, intensity: 0.5, color: 0Xffffff });
         this.addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
-        this.addPointLight({ x: 10, y: 10, z: -10, intensity: 7, color: 0Xff00ff });
+        this.addPointLight({ x: 10, y: 10, z: -10, intensity: 0.5, color: 0Xff00ff });
         this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
         this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
@@ -48,7 +48,7 @@ export default class Guitarra extends Component {
         controls.update();
     }
     createRender() {
-        this.renderer = new THREE.WebGLRenderer({ alpha: true });
+        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias:true });
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
