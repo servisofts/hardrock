@@ -43,6 +43,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
+    "rn-fetch-blob": "^0.12.0",
     "servisofts-component": "2.3.1",
     "servisofts-socket": "2.1.0",
     "three": "^0.136.0",

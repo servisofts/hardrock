@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
+// import hdr from '../../assets/hdr/3.hdr';
+import GuitarraJson from "./hr.json"
 export default class Guitarra extends Component {
     componentDidMount() {
         this.INSTANCE = this;
@@ -18,8 +20,8 @@ export default class Guitarra extends Component {
         this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
         this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
-        const gridHelper = new THREE.GridHelper(200, 200);
-        this.scene.add(gridHelper);
+        // const gridHelper = new THREE.GridHelper(200, 200);
+        // this.scene.add(gridHelper);
 
         this.createGuitarra();
         this.createHDR();
@@ -67,26 +69,31 @@ export default class Guitarra extends Component {
     }
     createHDR() {
         const INSTANCE = this;
-        new RGBELoader().load("./assets/hdr/3.hdr", function (texture) {
+        new RGBELoader().load("http://192.168.3.2:8081/src/DWV/web/assets/hdr/3.hdr", function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             INSTANCE.scene.background = texture;
             INSTANCE.scene.environment = texture;
             //  animate()
+        }, undefined, function (error) {
+            console.log(error.message);
         });
     }
     createGuitarra() {
         var guitarra;
         const INSTANCE = this;
         const loader = new GLTFLoader();
-        loader.load('./assets/hr.gltf', function (gltf) {
+        loader.parse(JSON.stringify(GuitarraJson),'', function (gltf) {
+        // loader.load("./assets/hr.gltf", function (gltf) {
+            // console.log("exito load");
             const guitarra = gltf.scene;
             guitarra.scale.y += 10;
             guitarra.scale.x += 10;
             guitarra.scale.z += 10;
-            INSTANCE.guitarra = guitarra;
+            // INSTANCE.guitarra = guitarra;
             INSTANCE.scene.add(guitarra);
         }, undefined, function (error) {
-            INSTANCE.log(error);
+            console.log(error.message);
+            console.log(error.stack);
         });
     }
     addPointLight({ x, y, z, intensity, color }) {
@@ -98,9 +105,7 @@ export default class Guitarra extends Component {
         this.scene.add(pointLight);
 
     }
-    log(msn) {
-        document.getElementById("console").innerHTML = msn + "<br>" + document.getElementById("console").innerHTML;
-    }
+ 
     render() {
         return (
             <div />

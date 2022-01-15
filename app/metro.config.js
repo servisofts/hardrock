@@ -16,7 +16,7 @@ module.exports = (async () => {
   } = await getDefaultConfig();
 
   assetExts.push("pem");
-  assetExts.push("gltf");
+  // assetExts.push("gltf");
   assetExts.push("hdr");
   assetExts.push("glb");
   // sourceExts.push("html");
