@@ -5,15 +5,36 @@
     },
     "extensionsUsed" : [
         "KHR_materials_clearcoat",
-        "KHR_materials_transmission"
+        "KHR_materials_transmission",
+        "KHR_lights_punctual"
     ],
+    "extensionsRequired" : [
+        "KHR_lights_punctual"
+    ],
+    "extensions" : {
+        "KHR_lights_punctual" : {
+            "lights" : [
+                {
+                    "color" : [
+                        1,
+                        1,
+                        1
+                    ],
+                    "intensity" : 10,
+                    "type" : "point",
+                    "name" : "Point"
+                }
+            ]
+        }
+    },
     "scene" : 0,
     "scenes" : [
         {
             "name" : "Scene",
             "nodes" : [
                 0,
-                1
+                1,
+                2
             ]
         }
     ],
@@ -50,7 +71,20 @@
             "translation" : [
                 -0.021514415740966797,
                 0.14980149269104004,
-                -0.7026865482330322
+                0.5647724866867065
+            ]
+        },
+        {
+            "extensions" : {
+                "KHR_lights_punctual" : {
+                    "light" : 0
+                }
+            },
+            "name" : "Point",
+            "translation" : [
+                -0.28177347779273987,
+                -0.3770233690738678,
+                0.16905809938907623
             ]
         }
     ],
