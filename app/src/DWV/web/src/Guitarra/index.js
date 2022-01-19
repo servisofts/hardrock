@@ -48,7 +48,7 @@ export default class Guitarra extends Component {
             this.mixers.forEach((mixer) => {
                 mixer.update(this.clock.getDelta());
             });
-            if(this.cubo){
+            if (this.cubo) {
                 //this.cubo.rotationZ(0.04 );
             }
             this.renderer.render(this.scene, this.camera);
@@ -67,10 +67,12 @@ export default class Guitarra extends Component {
         controls.update();
     }
     createRender() {
-        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias:true });
+        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
+        this.renderer.physicallyCorrectLights = true;
+        // this.renderer.toneMappingExposure = Math.pow(0.2, 0.2);
         document.getElementById("three").appendChild(this.renderer.domElement);
         // document.body.appendChild(this.renderer.domElement);
 
@@ -115,12 +117,12 @@ export default class Guitarra extends Component {
             console.log(error.stack);
         });
     }
-    
+
     createTablero() {
         const INSTANCE = this;
         const loader = new GLTFLoader();
         loader.parse(JSON.stringify(TABLERO), '', function (gltf) {
-        //loader.load(TABLERO, function (gltf) {
+            //loader.load(TABLERO, function (gltf) {
             // console.log("exito load");
             const tablero = gltf.scene;
             tablero.scale.y += 10;
@@ -138,8 +140,8 @@ export default class Guitarra extends Component {
         loader.parse(JSON.stringify(UNTITLED), '', function (gltf) {
             INSTANCE.untitled = gltf.scene;
             INSTANCE.scene.add(INSTANCE.untitled);
-            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky").children[0];
-            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
+            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky");
+            // INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
 
 
             var mixer = new THREE.AnimationMixer(INSTANCE.untitled);
@@ -154,13 +156,13 @@ export default class Guitarra extends Component {
 
             mixer.actions[0].play();
 
-            INSTANCE.cubo.rotationX =(x)=>{
+            INSTANCE.cubo.rotationX = (x) => {
                 INSTANCE.cubo.rotation.x += x;
             };
-            INSTANCE.cubo.rotationY =(y)=>{
+            INSTANCE.cubo.rotationY = (y) => {
                 INSTANCE.cubo.rotation.z += y;
             };
-            INSTANCE.cubo.rotationZ =(z)=>{
+            INSTANCE.cubo.rotationZ = (z) => {
                 INSTANCE.cubo.rotation.y += z;
             };
         }, undefined, function (error) {
@@ -174,7 +176,7 @@ export default class Guitarra extends Component {
         loader.parse(JSON.stringify(HARDROCK), '', function (gltf) {
             INSTANCE.hardRock = gltf.scene;
             INSTANCE.scene.add(INSTANCE.hardRock);
-            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky");
+            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky").children[0];
 
 
             var mixer = new THREE.AnimationMixer(INSTANCE.hardRock);
