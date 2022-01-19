@@ -5,6 +5,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 // import hdr from '../../assets/hdr/3.hdr';
 import GuitarraJson from "../Guitarra/hr.json";
+import TABLERO from "../../../../Assets/3d/tablero.json";
+
 export default class Guitarra extends Component {
     componentDidMount() {
         this.INSTANCE = this;
@@ -20,11 +22,12 @@ export default class Guitarra extends Component {
         this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
         this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
-        // const gridHelper = new THREE.GridHelper(200, 200);
-        // this.scene.add(gridHelper);
+        //const gridHelper = new THREE.GridHelper(200, 200);
+        //this.scene.add(gridHelper);
 
-        this.createGuitarra();
-        // this.createHDR();
+        //this.createGuitarra();
+        this.createTablero();
+        //this.createHDR();
 
         // this.animate();
         const animate = () => {
@@ -35,7 +38,7 @@ export default class Guitarra extends Component {
             this.renderer.render(this.scene, this.camera);
         }
         this.animate = animate;
-        this.orbitControls();
+        //this.orbitControls();
         this.renderer.setAnimationLoop(animate);
 
     }
@@ -58,12 +61,11 @@ export default class Guitarra extends Component {
     }
 
     createCamera() {
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
         // camera.position.x = 105.60000000000038;
-        var pos = 20;
-        this.camera.position.y = -10;
-        this.camera.position.z = pos;
-        this.camera.rotation.x = 0.4;
+        this.camera.position.y = 500;
+        //this.camera.position.z = 100;
+        //this.camera.rotation.x = 0.4;
         // camera.rotation.z = 0.4;
         // camera.rotation.y = 1.2799999999999736;
         // camera.rotation.z = 0;
@@ -92,6 +94,22 @@ export default class Guitarra extends Component {
             guitarra.scale.z += 10;
             // INSTANCE.guitarra = guitarra;
             INSTANCE.scene.add(guitarra);
+        }, undefined, function (error) {
+            console.log(error.message);
+            console.log(error.stack);
+        });
+    }
+    createTablero() {
+        const INSTANCE = this;
+        const loader = new GLTFLoader();
+        loader.parse(JSON.stringify(TABLERO), '', function (gltf) {
+        //loader.load(TABLERO, function (gltf) {
+            // console.log("exito load");
+            const tablero = gltf.scene;
+            tablero.scale.y += 10;
+            tablero.scale.x += 10;
+            tablero.scale.z += 10;
+            INSTANCE.scene.add(tablero);
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);
