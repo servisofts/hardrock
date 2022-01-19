@@ -6,27 +6,32 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 // import hdr from '../../assets/hdr/3.hdr';
 import GuitarraJson from "../Guitarra/hr.json";
 import TABLERO from "../../../../Assets/3d/tablero.json";
+import UNTITLED from "../../../../Assets/3d/untitled.json";
 
 export default class Guitarra extends Component {
     componentDidMount() {
         this.INSTANCE = this;
         this.createRender();
         this.createCamera();
+        THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
+        //var euler = new THREE.Euler(0, 0, 0, 'XYZ');
 
         this.scene = new THREE.Scene();
-        const lightAmbiental = new THREE.AmbientLight(0xffffff, 2.8);
+        const lightAmbiental = new THREE.AmbientLight(0xffffff, 1);
         this.scene.add(lightAmbiental);
-        this.addPointLight({ x: -10, y: 10, z: -10, intensity: 0.5, color: 0Xffffff });
-        this.addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
-        this.addPointLight({ x: 10, y: 10, z: -10, intensity: 0.5, color: 0Xff00ff });
-        this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
-        this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
-        //const gridHelper = new THREE.GridHelper(200, 200);
-        //this.scene.add(gridHelper);
+        //this.addPointLight({ x: -10, y: 10, z: -10, intensity: 0.5, color: 0Xffffff });
+        //this.addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
+        //this.addPointLight({ x: 10, y: 10, z: -10, intensity: 0.5, color: 0Xff00ff });
+        //this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
+        //this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
+
+        const gridHelper = new THREE.GridHelper(200, 200);
+        this.scene.add(gridHelper);
 
         //this.createGuitarra();
-        this.createTablero();
+        //this.createTablero();
+        this.createUntitled();
         //this.createHDR();
 
         // this.animate();
@@ -34,7 +39,9 @@ export default class Guitarra extends Component {
             // requestAnimationFrame(this.animate);
             // this.camera.position.z -= 0.02;
             // this.camera.position.z -= 0;
-            // this.camera.rotation.x -= 0.4;
+            if(this.cubo){
+                this.cubo.rotation.z += 0.04;
+            }
             this.renderer.render(this.scene, this.camera);
         }
         this.animate = animate;
@@ -63,7 +70,7 @@ export default class Guitarra extends Component {
     createCamera() {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
         // camera.position.x = 105.60000000000038;
-        this.camera.position.y = 500;
+        //this.camera.position.y = 500;
         //this.camera.position.z = 100;
         //this.camera.rotation.x = 0.4;
         // camera.rotation.z = 0.4;
@@ -110,6 +117,19 @@ export default class Guitarra extends Component {
             tablero.scale.x += 10;
             tablero.scale.z += 10;
             INSTANCE.scene.add(tablero);
+        }, undefined, function (error) {
+            console.log(error.message);
+            console.log(error.stack);
+        });
+    }
+    createUntitled() {
+        const INSTANCE = this;
+        const loader = new GLTFLoader();
+        loader.parse(JSON.stringify(UNTITLED), '', function (gltf) {
+            INSTANCE.untitled = gltf.scene;
+            INSTANCE.scene.add(INSTANCE.untitled);
+            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky").children[0];
+            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);
