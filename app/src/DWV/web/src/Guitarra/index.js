@@ -7,18 +7,23 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import GuitarraJson from "../Guitarra/hr.json";
 import TABLERO from "../../../../Assets/3d/tablero.json";
 import UNTITLED from "../../../../Assets/3d/untitled.json";
+import HARDROCK from "../../../../Assets/3d/hardrock.json";
 
 export default class Guitarra extends Component {
     componentDidMount() {
+
+        this.clock = new THREE.Clock();
+
         this.INSTANCE = this;
+        this.mixers = [];
         this.createRender();
         this.createCamera();
         THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
         //var euler = new THREE.Euler(0, 0, 0, 'XYZ');
 
         this.scene = new THREE.Scene();
-        const lightAmbiental = new THREE.AmbientLight(0xffffff, 1);
-        this.scene.add(lightAmbiental);
+        //const lightAmbiental = new THREE.AmbientLight(0xffffff, 1);
+        //this.scene.add(lightAmbiental);
 
         //this.addPointLight({ x: -10, y: 10, z: -10, intensity: 0.5, color: 0Xffffff });
         //this.addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
@@ -31,7 +36,8 @@ export default class Guitarra extends Component {
 
         //this.createGuitarra();
         //this.createTablero();
-        this.createUntitled();
+        //this.createUntitled();
+        this.createHardRock();
         //this.createHDR();
 
         // this.animate();
@@ -39,8 +45,11 @@ export default class Guitarra extends Component {
             // requestAnimationFrame(this.animate);
             // this.camera.position.z -= 0.02;
             // this.camera.position.z -= 0;
+            this.mixers.forEach((mixer) => {
+                mixer.update(this.clock.getDelta());
+            });
             if(this.cubo){
-                this.cubo.rotation.z += 0.04;
+                //this.cubo.rotationZ(0.04 );
             }
             this.renderer.render(this.scene, this.camera);
         }
@@ -106,6 +115,7 @@ export default class Guitarra extends Component {
             console.log(error.stack);
         });
     }
+    
     createTablero() {
         const INSTANCE = this;
         const loader = new GLTFLoader();
@@ -130,6 +140,55 @@ export default class Guitarra extends Component {
             INSTANCE.scene.add(INSTANCE.untitled);
             INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky").children[0];
             INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
+
+
+            var mixer = new THREE.AnimationMixer(INSTANCE.untitled);
+            mixer.actions = [];
+            for (var i = 0; i < gltf.animations.length; i++) {
+                var action = mixer.clipAction(gltf.animations[i]);
+                mixer.actions.push(action);
+            }
+            INSTANCE.mixers.push(mixer);
+            mixer.actions[0].setLoop(THREE.LoopOnce);
+            mixer.actions[0].clampWhenFinished = true;
+
+            mixer.actions[0].play();
+
+            INSTANCE.cubo.rotationX =(x)=>{
+                INSTANCE.cubo.rotation.x += x;
+            };
+            INSTANCE.cubo.rotationY =(y)=>{
+                INSTANCE.cubo.rotation.z += y;
+            };
+            INSTANCE.cubo.rotationZ =(z)=>{
+                INSTANCE.cubo.rotation.y += z;
+            };
+        }, undefined, function (error) {
+            console.log(error.message);
+            console.log(error.stack);
+        });
+    }
+    createHardRock() {
+        const INSTANCE = this;
+        const loader = new GLTFLoader();
+        loader.parse(JSON.stringify(HARDROCK), '', function (gltf) {
+            INSTANCE.hardRock = gltf.scene;
+            INSTANCE.scene.add(INSTANCE.hardRock);
+            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky");
+
+
+            var mixer = new THREE.AnimationMixer(INSTANCE.hardRock);
+            mixer.actions = [];
+            for (var i = 0; i < gltf.animations.length; i++) {
+                var action = mixer.clipAction(gltf.animations[i]);
+                mixer.actions.push(action);
+            }
+            INSTANCE.mixers.push(mixer);
+            mixer.actions[0].setLoop(THREE.LoopOnce);
+            mixer.actions[0].clampWhenFinished = true;
+
+            mixer.actions[0].play();
+
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);
