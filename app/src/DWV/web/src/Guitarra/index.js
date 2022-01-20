@@ -188,9 +188,9 @@ export default class Guitarra extends Component {
                 mixer.actions.push(action);
             }
             INSTANCE.mixers.push(mixer);
-            mixer.actions[1].setLoop(THREE.LoopOnce);
-            mixer.actions[1].clampWhenFinished = true;
-            mixer.actions[1].play();
+            mixer.actions[0].setLoop(THREE.LoopOnce);
+            mixer.actions[0].clampWhenFinished = true;
+            mixer.actions[0].play();
 
         }, undefined, function (error) {
             console.log(error.message);
