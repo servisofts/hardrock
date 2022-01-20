@@ -31,8 +31,8 @@ export default class Guitarra extends Component {
         //this.addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
         //this.addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
 
-        const gridHelper = new THREE.GridHelper(200, 200);
-        this.scene.add(gridHelper);
+        // const gridHelper = new THREE.GridHelper(200, 200);
+        // this.scene.add(gridHelper);
 
         //this.createGuitarra();
         //this.createTablero();
@@ -72,6 +72,7 @@ export default class Guitarra extends Component {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
         this.renderer.physicallyCorrectLights = true;
+        this.renderer.shadowMap.enabled = true;
         // this.renderer.toneMappingExposure = Math.pow(0.2, 0.2);
         document.getElementById("three").appendChild(this.renderer.domElement);
         // document.body.appendChild(this.renderer.domElement);
@@ -175,6 +176,7 @@ export default class Guitarra extends Component {
         const loader = new GLTFLoader();
         loader.parse(JSON.stringify(HARDROCK), '', function (gltf) {
             INSTANCE.hardRock = gltf.scene;
+            INSTANCE.hardRock.castShadow = true;
             INSTANCE.scene.add(INSTANCE.hardRock);
             INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera_ricky").children[0];
 
@@ -186,10 +188,9 @@ export default class Guitarra extends Component {
                 mixer.actions.push(action);
             }
             INSTANCE.mixers.push(mixer);
-            mixer.actions[0].setLoop(THREE.LoopOnce);
-            mixer.actions[0].clampWhenFinished = true;
-
-            mixer.actions[0].play();
+            mixer.actions[1].setLoop(THREE.LoopOnce);
+            mixer.actions[1].clampWhenFinished = true;
+            mixer.actions[1].play();
 
         }, undefined, function (error) {
             console.log(error.message);
