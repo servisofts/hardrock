@@ -39,7 +39,7 @@ class Carga extends Component {
                     {/* <SThree ref={(ref) => { this.td = ref }} /> */}
                     <DWV />
                 </SView>
-                <SView row col={"xs-12"} center style={{
+                {/* <SView row col={"xs-12"} center style={{
                     position: "absolute",
                     bottom: 8,
                 }}>
@@ -57,7 +57,7 @@ class Carga extends Component {
                         this.td.send({ component: "test" })
                         // this.writeFile();
                     }}>VER</SButtom>
-                </SView>
+                </SView> */}
             </SPage>
         );
     }
