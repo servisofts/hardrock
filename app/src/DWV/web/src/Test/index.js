@@ -12,8 +12,11 @@ class Test extends Component {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
         this.renderer.setClearColor(0x000000)
+        
         this.renderer.physicallyCorrectLights = true;
         this.renderer.shadowMap.enabled = true;
+        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        this.renderer.toneMappingExposure = 0.25;
         document.getElementById("three").appendChild(this.renderer.domElement);
 
     }
@@ -31,6 +34,7 @@ class Test extends Component {
             INSTANCE.piso = INSTANCE.scene.getObjectByName("Piso");
             INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
+
             INSTANCE.piso.receiveShadow = true;
             INSTANCE.light.castShadow = true;
             INSTANCE.cubo.castShadow = true;
@@ -42,18 +46,11 @@ class Test extends Component {
     resizeCanvasToDisplaySize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         const canvas = this.renderer.domElement;
-        // look up the size the canvas is being displayed
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
-
-        // adjust displayBuffer size to match
-        // if (canvas.width !== width || canvas.height !== height) {
-            // you must pass false here or three.js sadly fights the browser
-            this.renderer.setSize(width, height, false);
-            this.camera.aspect = width / height;
-            this.camera.updateProjectionMatrix();
-            // update any render target sizes here
-        // }
+        this.renderer.setSize(width, height, false);
+        this.camera.aspect = width / height;
+        this.camera.updateProjectionMatrix();
     }
     componentDidMount() {
         this.createRender();
@@ -85,7 +82,6 @@ class Test extends Component {
         // ----RENDER----
         const animate = () => {
             this.resizeCanvasToDisplaySize();
-
             this.renderer.render(this.scene, this.camera);
         }
         this.animate = animate;
