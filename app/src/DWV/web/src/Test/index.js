@@ -72,6 +72,30 @@ class Test extends Component {
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
     }
+    onClick(event){
+        const INSTANCE = this;
+        const mouse = {
+            x: (event.clientX / window.innerWidth) * 2 - 1,
+            y: -(event.clientY / window.innerHeight) * 2 + 1,
+        }
+        const intersects = INSTANCE.raycaster.intersectObjects(INSTANCE.scene.children[0].children, false)
+    
+        if (intersects.length > 0) {
+            console.log(intersects[0].object.name)
+    
+            // const cube = new THREE.Mesh(boxGeometry, material)
+            /*const cube = new THREE.Mesh(coneGeometry, material)
+    
+            cube.lookAt(n)
+            cube.rotateX(Math.PI / 2)
+            cube.position.copy(intersects[0].point)
+            cube.position.addScaledVector(n, 0.1)
+    
+            scene.add(cube)
+            sceneMeshes.push(cube)*/
+        }
+    }
+    
     componentDidMount() {
         this.createRender();
         this.scene = new THREE.Scene();
@@ -82,6 +106,11 @@ class Test extends Component {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         this.gltfLoader.setDRACOLoader(dracoLoader);
 
+        this.raycaster = new THREE.Raycaster();
+        this.mouse = new THREE.Vector2();
+        this.renderer.domElement.addEventListener('click', (event)=>this.onClick(event), false)
+        
+        this.raycaster.setFromCamera( this.mouse, this.camera );
         // var light = new THREE.AmbientLight(0xffffff, 1.5);
         // this.scene.add(light);
         // const gridHelper = new THREE.GridHelper(200, 200);
@@ -109,6 +138,7 @@ class Test extends Component {
 
         // ----RENDER----
         const animate = () => {
+            
             this.resizeCanvasToDisplaySize();
             this.mixers.forEach((mixer) => {
                 mixer.update(this.clock.getDelta());
