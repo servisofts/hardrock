@@ -107,7 +107,7 @@
         },
         {
             "mesh" : 1,
-            "name" : "Cube.001",
+            "name" : "Piso",
             "scale" : [
                 11.228997230529785,
                 0.1351156234741211,
@@ -178,7 +178,7 @@
             ]
         },
         {
-            "name" : "Cube.001",
+            "name" : "Piso",
             "primitives" : [
                 {
                     "attributes" : {

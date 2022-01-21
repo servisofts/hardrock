@@ -11,6 +11,7 @@ class Test extends Component {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
+        this.renderer.setClearColor(0x000000)
         this.renderer.physicallyCorrectLights = true;
         this.renderer.shadowMap.enabled = true;
         document.getElementById("three").appendChild(this.renderer.domElement);
@@ -27,6 +28,12 @@ class Test extends Component {
             INSTANCE.test = gltf.scene;
             INSTANCE.scene.add(INSTANCE.test);
             INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera").children[0];
+            INSTANCE.piso = INSTANCE.scene.getObjectByName("Piso");
+            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
+            INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
+            INSTANCE.piso.receiveShadow = true;
+            INSTANCE.light.castShadow = true;
+            INSTANCE.cubo.castShadow = true;
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);
@@ -40,13 +47,13 @@ class Test extends Component {
         const height = canvas.clientHeight;
 
         // adjust displayBuffer size to match
-        if (canvas.width !== width || canvas.height !== height) {
+        // if (canvas.width !== width || canvas.height !== height) {
             // you must pass false here or three.js sadly fights the browser
             this.renderer.setSize(width, height, false);
             this.camera.aspect = width / height;
             this.camera.updateProjectionMatrix();
             // update any render target sizes here
-        }
+        // }
     }
     componentDidMount() {
         this.createRender();
