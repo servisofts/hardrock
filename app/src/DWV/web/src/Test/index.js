@@ -30,14 +30,25 @@ class Test extends Component {
         this.gltfLoader.parse(JSON.stringify(TEST), '', function (gltf) {
             INSTANCE.test = gltf.scene;
             INSTANCE.scene.add(INSTANCE.test);
+
             INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera").children[0];
             INSTANCE.piso = INSTANCE.scene.getObjectByName("Piso");
-            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
-            INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
-
             INSTANCE.piso.receiveShadow = true;
-            INSTANCE.light.castShadow = true;
+
+            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
             INSTANCE.cubo.castShadow = true;
+
+            INSTANCE.ventana = INSTANCE.scene.getObjectByName("Ventana");
+            
+            INSTANCE.ventana.material.transparent = true;
+            INSTANCE.ventana.castShadow = true;
+            
+
+
+            INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
+            INSTANCE.light.castShadow = true;
+
+
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);
