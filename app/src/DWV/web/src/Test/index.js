@@ -16,7 +16,7 @@ class Test extends Component {
         this.renderer.physicallyCorrectLights = true;
         this.renderer.shadowMap.enabled = true;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        this.renderer.toneMappingExposure = 1;
+        this.renderer.toneMappingExposure = 0.3;
         document.getElementById("three").appendChild(this.renderer.domElement);
 
     }
@@ -52,12 +52,14 @@ class Test extends Component {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         this.gltfLoader.setDRACOLoader(dracoLoader);
 
+        // var light = new THREE.AmbientLight(0xffffff, 1.5);
+        // this.scene.add(light);
         // const gridHelper = new THREE.GridHelper(200, 200);
         // this.scene.add(gridHelper);
         // const gridHelper2 = new THREE.GridHelper(200, 200);
         // gridHelper2.rotation.x = Math.PI / 2;
         // this.scene.add(gridHelper2);
-
+        
         // const axesHelper = new THREE.AxesHelper(100);
         // this.scene.add(axesHelper);
 
