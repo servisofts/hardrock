@@ -13,7 +13,7 @@ class Test extends Component {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.outputEnconding = THREE.sRGBEncoding;
         this.renderer.setClearColor(0x000000)
-        
+
         this.renderer.physicallyCorrectLights = true;
         this.renderer.shadowMap.enabled = true;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -49,10 +49,10 @@ class Test extends Component {
             INSTANCE.cubo.castShadow = true;
 
             INSTANCE.ventana = INSTANCE.scene.getObjectByName("Ventana");
-            
-            INSTANCE.ventana.material.transparent = true;
+            INSTANCE.ventana.material.opacity = 0.1;
             INSTANCE.ventana.castShadow = true;
-            
+            INSTANCE.ventana.receiveShadow = true;
+
 
 
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
