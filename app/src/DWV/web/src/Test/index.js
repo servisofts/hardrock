@@ -4,8 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import  Stats  from 'three/examples/jsm/libs/stats.module'
-
-import TEST from "./test.json";
+import Blender from "./Blender";
 class Test extends Component {
     createRender() {
         this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -17,7 +16,7 @@ class Test extends Component {
         this.renderer.physicallyCorrectLights = true;
         this.renderer.shadowMap.enabled = true;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        this.renderer.toneMappingExposure = 0.25;
+        this.renderer.toneMappingExposure = 1;
         document.getElementById("three").appendChild(this.renderer.domElement);
 
     }
@@ -33,37 +32,7 @@ class Test extends Component {
         INSTANCE.stats.domElement.style.top = '0';
         document.body.appendChild(INSTANCE.stats.dom)
     }
-    createTest() {
-        const INSTANCE = this;
-
-        // loader.load("./test.gltf", function (gltf) {
-        this.gltfLoader.parse(JSON.stringify(TEST), '', function (gltf) {
-            INSTANCE.test = gltf.scene;
-            INSTANCE.scene.add(INSTANCE.test);
-
-            INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera").children[0];
-            INSTANCE.piso = INSTANCE.scene.getObjectByName("Piso");
-            INSTANCE.piso.receiveShadow = true;
-
-            INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
-            INSTANCE.cubo.castShadow = true;
-
-            INSTANCE.ventana = INSTANCE.scene.getObjectByName("Ventana");
-            INSTANCE.ventana.material.opacity = 0.1;
-            INSTANCE.ventana.castShadow = true;
-            INSTANCE.ventana.receiveShadow = true;
-
-
-
-            INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
-            INSTANCE.light.castShadow = true;
-
-
-        }, undefined, function (error) {
-            console.log(error.message);
-            console.log(error.stack);
-        });
-    }
+    
     resizeCanvasToDisplaySize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         const canvas = this.renderer.domElement;
@@ -92,12 +61,7 @@ class Test extends Component {
         // const axesHelper = new THREE.AxesHelper(100);
         // this.scene.add(axesHelper);
 
-        this.createTest();
-
-        // const geometry = new THREE.BoxGeometry(5, 5, 5);
-        // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        // const cube = new THREE.Mesh(geometry, material);
-        // this.scene.add(cube);
+        this.blender = new Blender(this);
 
         this.createStats();
 
@@ -105,6 +69,8 @@ class Test extends Component {
         // ----RENDER----
         const animate = () => {
             this.resizeCanvasToDisplaySize();
+            this.blender.render();
+            
             this.renderer.render(this.scene, this.camera);
             this.stats.update();
         }
