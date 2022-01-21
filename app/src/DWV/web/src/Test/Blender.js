@@ -19,7 +19,7 @@ export default class Blender {
             INSTANCE.piso.receiveShadow = true;
 
             INSTANCE.cubo = INSTANCE.scene.getObjectByName("Guitarra");
-            INSTANCE.cubo.receiveShadow = true;
+            // INSTANCE.cubo.receiveShadow = true;
             INSTANCE.cubo.castShadow = true;
 
             INSTANCE.ventana = INSTANCE.scene.getObjectByName("Ventana");
@@ -40,13 +40,7 @@ export default class Blender {
 
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
             INSTANCE.light.castShadow = true;
-            // INSTANCE.light.shadow.mapSize.width = 2048;
-            // INSTANCE.light.shadow.mapSize.height = 2048;
-            // INSTANCE.light.shadow.camera.near = 0.5;
-            // INSTANCE.light.shadow.camera.far = 500;
-            // INSTANCE.light.shadow.camera.fov = 45;
-            
-            // INSTANCE.light.shadow.mapSize.width = 2048;
+ 
 
 
         }, undefined, function (error) {
