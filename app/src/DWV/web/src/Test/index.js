@@ -62,14 +62,14 @@ class Test extends Component {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         this.gltfLoader.setDRACOLoader(dracoLoader);
 
-        const gridHelper = new THREE.GridHelper(200, 200);
+        // const gridHelper = new THREE.GridHelper(200, 200);
         // this.scene.add(gridHelper);
-        const gridHelper2 = new THREE.GridHelper(200, 200);
-        gridHelper2.rotation.x = Math.PI / 2;
+        // const gridHelper2 = new THREE.GridHelper(200, 200);
+        // gridHelper2.rotation.x = Math.PI / 2;
         // this.scene.add(gridHelper2);
 
-        const axesHelper = new THREE.AxesHelper(100);
-        this.scene.add(axesHelper);
+        // const axesHelper = new THREE.AxesHelper(100);
+        // this.scene.add(axesHelper);
 
         this.createTest();
 
