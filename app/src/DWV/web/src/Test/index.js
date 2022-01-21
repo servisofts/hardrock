@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import  Stats  from 'three/examples/jsm/libs/stats.module'
 
 import TEST from "./test.json";
 class Test extends Component {
@@ -22,6 +23,15 @@ class Test extends Component {
     }
     createCamera() {
         this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+    }
+    createStats() {
+        const INSTANCE = this;
+        INSTANCE.stats = new Stats();
+        INSTANCE.stats.setMode(0);
+        INSTANCE.stats.domElement.style.position = 'absolute';
+        INSTANCE.stats.domElement.style.left = '0';
+        INSTANCE.stats.domElement.style.top = '0';
+        document.body.appendChild(INSTANCE.stats.dom)
     }
     createTest() {
         const INSTANCE = this;
@@ -89,11 +99,14 @@ class Test extends Component {
         // const cube = new THREE.Mesh(geometry, material);
         // this.scene.add(cube);
 
+        this.createStats();
+
 
         // ----RENDER----
         const animate = () => {
             this.resizeCanvasToDisplaySize();
             this.renderer.render(this.scene, this.camera);
+            this.stats.update();
         }
         this.animate = animate;
         this.renderer.setAnimationLoop(animate);
