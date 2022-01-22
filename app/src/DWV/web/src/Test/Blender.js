@@ -39,7 +39,7 @@ export default class Blender {
             INSTANCE.mixer.actions[0].setLoop(INSTANCE.LoopOnce);
             INSTANCE.mixer.actions[0].clampWhenFinished = true;
 
-            INSTANCE.mixer.actions[0].play();
+            // INSTANCE.mixer.actions[0].play();
 
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
             INSTANCE.light.castShadow = true;

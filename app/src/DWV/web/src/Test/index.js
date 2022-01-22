@@ -34,35 +34,7 @@ class Test extends Component {
         INSTANCE.stats.domElement.style.top = '0';
         document.body.appendChild(INSTANCE.stats.dom)
     }
-    // createTest() {
-    //     const INSTANCE = this;
 
-    //     // loader.load("./test.gltf", function (gltf) {
-    //     this.gltfLoader.parse(JSON.stringify(TEST), '', function (gltf) {
-    //         INSTANCE.test = gltf.scene;
-    //         INSTANCE.scene.add(INSTANCE.test);
-
-    //         INSTANCE.camera = INSTANCE.scene.getObjectByName("Camera").children[0];
-    //         INSTANCE.piso = INSTANCE.scene.getObjectByName("Piso");
-    //         INSTANCE.piso.receiveShadow = true;
-
-    //         INSTANCE.cubo = INSTANCE.scene.getObjectByName("Cube");
-    //         INSTANCE.cubo.castShadow = true;
-
-    //         INSTANCE.ventana = INSTANCE.scene.getObjectByName("Ventana");
-    //         INSTANCE.ventana.material.opacity = 0.1;
-    //         INSTANCE.ventana.castShadow = true;
-    //         INSTANCE.ventana.receiveShadow = true;
-
-    //         INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
-    //         INSTANCE.light.castShadow = true;
-
-
-    //     }, undefined, function (error) {
-    //         console.log(error.message);
-    //         console.log(error.stack);
-    //     });
-    // }
     resizeCanvasToDisplaySize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         const canvas = this.renderer.domElement;
@@ -72,30 +44,23 @@ class Test extends Component {
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
     }
-    onClick(event){
+    onClick(event) {
         const INSTANCE = this;
         const mouse = {
-            x: (event.clientX / window.innerWidth) * 2 - 1,
-            y: -(event.clientY / window.innerHeight) * 2 + 1,
+            x: (event.clientX / this.renderer.domElement.clientWidth) * 2 - 1,
+            y: -(event.clientY / this.renderer.domElement.clientHeight) * 2 + 1,
         }
-        const intersects = INSTANCE.raycaster.intersectObjects(INSTANCE.scene.children[0].children, false)
-    
+
+        this.raycaster.setFromCamera(mouse, this.camera);
+        const intersects = INSTANCE.raycaster.intersectObjects(INSTANCE.scene.children)
+
         if (intersects.length > 0) {
-            console.log(intersects[0].object.name)
-    
-            // const cube = new THREE.Mesh(boxGeometry, material)
-            /*const cube = new THREE.Mesh(coneGeometry, material)
-    
-            cube.lookAt(n)
-            cube.rotateX(Math.PI / 2)
-            cube.position.copy(intersects[0].point)
-            cube.position.addScaledVector(n, 0.1)
-    
-            scene.add(cube)
-            sceneMeshes.push(cube)*/
+            var guitarra = intersects.filter(o => o.object.name.includes("Guitarra"));
+            console.log(guitarra)
+
         }
     }
-    
+
     componentDidMount() {
         this.createRender();
         this.scene = new THREE.Scene();
@@ -108,9 +73,9 @@ class Test extends Component {
 
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
-        this.renderer.domElement.addEventListener('click', (event)=>this.onClick(event), false)
-        
-        this.raycaster.setFromCamera( this.mouse, this.camera );
+        this.renderer.domElement.addEventListener('click', (event) => this.onClick(event), false)
+
+
         // var light = new THREE.AmbientLight(0xffffff, 1.5);
         // this.scene.add(light);
         // const gridHelper = new THREE.GridHelper(200, 200);
@@ -138,7 +103,7 @@ class Test extends Component {
 
         // ----RENDER----
         const animate = () => {
-            
+
             this.resizeCanvasToDisplaySize();
             this.mixers.forEach((mixer) => {
                 mixer.update(this.clock.getDelta());
