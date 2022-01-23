@@ -1,6 +1,8 @@
-
+import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import  {CSS3DObject}  from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+
 import PRUEBA1 from "../../../../Assets/3d/prueba1.json";
 export default class Blender {
     main;
@@ -31,7 +33,34 @@ export default class Blender {
             // main.piso = main.scene.getObjectByName("Piso");
             // main.piso.receiveShadow = true;
             // main.piso.castShadowq = true;
+            
+            
+            main.pantalla = main.scene.getObjectByName("pantalla");
+            var html = '<iframe src="https://calisteniabolivia.com" width="100" height="50">';
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            var cssObject = new CSS3DObject(div);
+            
+            
+            cssObject.position.copy( main.pantalla.position );
+            cssObject.rotation.copy( main.pantalla.rotation );
 
+            main.scene.add(cssObject);
+/*
+            var div = document.createElement( 'div' );
+            div.style.width = '480px';
+            div.style.height = '360px';
+            var iframe = document.createElement( 'iframe' );
+            iframe.style.width = '480px';
+            iframe.style.height = '360px';
+            iframe.style.border = '0px';
+            iframe.src = [ 'https://www.youtube.com/embed/sd54sefd?rel=0'   ].join( '' );
+            div.appendChild( iframe );
+            main.pantalla.add(div);
+*/
+            //main.pantalla.receiveShadow = true;
+            //main.pantalla.add(main.YoutubePlayer);
+            
         }, undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);

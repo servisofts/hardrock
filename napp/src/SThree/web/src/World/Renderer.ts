@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import  {CSS3DRenderer}  from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 export default class Renderer {
     main;
@@ -6,16 +7,31 @@ export default class Renderer {
         this.main = main;
         main.clock = new THREE.Clock();
         main.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        main.cssRenderer = new CSS3DRenderer();
+
         main.renderer.setPixelRatio(window.devicePixelRatio);
+        //main.cssRenderer.setPixelRatio(window.devicePixelRatio);
+
         main.renderer.setSize(window.innerWidth, window.innerHeight);
+        main.cssRenderer.setSize(window.innerWidth, window.innerHeight);
+
         main.renderer.outputEnconding = THREE.sRGBEncoding;
-        main.renderer.setClearColor(0x000000)
+        main.renderer.setClearColor(0x000000);
+
+        main.renderer.domElement.style.position = 'absolute';
+        main.cssRenderer.domElement.style.position = 'absolute';
+
+        main.renderer.domElement.style.top = 0;
+        main.cssRenderer.domElement.style.top = 0;
+
 
         main.renderer.physicallyCorrectLights = true;
         main.renderer.shadowMap.enabled = true;
         main.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         main.renderer.toneMappingExposure = 0.5;
+        
         document.getElementById("three").appendChild(main.renderer.domElement);
+        document.getElementById("three").appendChild(main.cssRenderer.domElement);
 
         main.addToRender('Renderer', this);
     }
