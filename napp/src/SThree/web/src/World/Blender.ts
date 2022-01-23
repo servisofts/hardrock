@@ -17,14 +17,19 @@ export default class Blender {
             main.scene.add(main.test);
             main.light = main.scene.getObjectByName("Light").children[0];
             main.light.castShadow = true;
+            main.Pointlight = main.scene.getObjectByName("Point").children[0];
+            main.Pointlight.castShadow = true;
 
             gltf.scene.traverse(function (model) {
-                if (model.isMesh && model.name.includes("Arbol")) {
+                if (model.isMesh && model.name.includes("_cs")) {
                     model.castShadow = true;
                 }
+                if (model.isMesh && model.name.includes("_rs")) {
+                    model.receiveShadow = true;
+                }
             });
-            main.piso = main.scene.getObjectByName("Piso");
-            main.piso.receiveShadow = true;
+            // main.piso = main.scene.getObjectByName("Piso");
+            // main.piso.receiveShadow = true;
             // main.piso.castShadowq = true;
 
         }, undefined, function (error) {
