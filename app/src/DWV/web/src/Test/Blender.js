@@ -36,7 +36,7 @@ export default class Blender {
             }
             INSTANCE.mixers.push(INSTANCE.mixer);
 
-            INSTANCE.mixer.actions[0].setLoop(THREE.LoopOnce);
+            INSTANCE.mixer.actions[0].setLoop(INSTANCE.LoopOnce);
             INSTANCE.mixer.actions[0].clampWhenFinished = true;
             // INSTANCE.mixer.actions[0].play();
 
