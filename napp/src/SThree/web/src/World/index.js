@@ -41,6 +41,7 @@ export default class index extends Component {
             this.ITEMS_TO_RENDER[key].render();
         })
         this.renderer.render(this.scene, this.camera);
+        this.cssRenderer.render(this.scene, this.camera);
     }
 
     render() { return <div id="three" /> }

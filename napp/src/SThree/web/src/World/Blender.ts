@@ -1,6 +1,8 @@
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import  {CSS3DObject}  from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+
 import PRUEBA1 from "../../../../Assets/3d/prueba1.json";
 import * as THREE from "three";
 
@@ -43,6 +45,21 @@ export default class Blender {
                 this.mixer.actions.push(action);
                 action.play();
             }
+
+            main.pantalla = main.scene.getObjectByName("pantalla");
+            var html = '<iframe src="https://calisteniabolivia.com" width="100" height="50">';
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            var cssObject = new CSS3DObject(div);
+            
+            
+            cssObject.position.copy( main.pantalla.position );
+            cssObject.rotation.copy( main.pantalla.rotation );
+            cssObject.scale.copy( main.pantalla.scale );
+
+            main.scene.add(cssObject);
+
+
             // this.mixers.push(this.mixer);
 
             // this.mixer[0].setLoop(THREE.LoopOnce);
