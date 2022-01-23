@@ -35,15 +35,10 @@ export default class Blender {
                 INSTANCE.mixer.actions[gltf.animations[i].name] = action;
             }
             INSTANCE.mixers.push(INSTANCE.mixer);
-<<<<<<< Updated upstream
 
-            INSTANCE.mixer.actions[0].setLoop(INSTANCE.LoopOnce);
+            INSTANCE.mixer.actions[0].setLoop(THREE.LoopOnce);
             INSTANCE.mixer.actions[0].clampWhenFinished = true;
             // INSTANCE.mixer.actions[0].play();
-=======
-            
-            INSTANCE.moverse("t_front_menu");
->>>>>>> Stashed changes
 
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
             INSTANCE.light.castShadow = true;

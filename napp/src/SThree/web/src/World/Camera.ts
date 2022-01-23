@@ -14,7 +14,7 @@ export default class Camera {
         this.main = main;
         main.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         main.addToRender('Camera', this);
-        main.camera.position.set(0, 2, 10);
+        main.camera.position.set(0, 1.5, 10);
         // main.camera.rotation.x = -0.2
 
         // this.createGUIControls();
@@ -39,7 +39,7 @@ export default class Camera {
 
     render() {
         var pos = { ...this.main.camera.position };
-        var delta = this.main.clock.getDelta();
+        var delta = this.main.DELTA;
         var speed = 1;
         if (this.keystate[16]) {
             speed = this.props.speedRun;

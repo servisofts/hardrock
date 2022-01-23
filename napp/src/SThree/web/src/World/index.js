@@ -9,9 +9,21 @@ import Stats from "./Stats";
 export default class index extends Component {
     ITEMS_TO_RENDER = {};
     componentDidMount() {
+        // var elem = document.getElementById("three");
+        // if (elem.requestFullscreen) {
+        //     elem.requestFullscreen();
+        // } else if (elem.mozRequestFullScreen) { /* Firefox */
+        //     elem.mozRequestFullScreen();
+        // } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        //     elem.webkitRequestFullscreen();
+        // } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        //     elem.msRequestFullscreen();
+        // }
+        // elem.style.width = '100%';
+        // elem.style.height = '100%';
         new Renderer(this);
         this.scene = new THREE.Scene();
-        
+
         new Stats(this);
         new Camera(this);
         // new Helpers(this);
@@ -24,6 +36,7 @@ export default class index extends Component {
     }
 
     animate() {
+        this.DELTA = this.clock.getDelta();
         Object.keys(this.ITEMS_TO_RENDER).forEach(key => {
             this.ITEMS_TO_RENDER[key].render();
         })
