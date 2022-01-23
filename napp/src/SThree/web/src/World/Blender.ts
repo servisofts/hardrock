@@ -15,10 +15,13 @@ export default class Blender {
         main.gltfLoader.parse(JSON.stringify(PRUEBA1), '', async (gltf) => {
             main.test = gltf.scene;
             main.scene.add(main.test);
-            main.light = main.scene.getObjectByName("Light").children[0];
+            main.light = main.scene.getObjectByName("Point").children[0];
             main.light.castShadow = true;
-            main.Pointlight = main.scene.getObjectByName("Point").children[0];
-            main.Pointlight.castShadow = true;
+            main.light = main.scene.getObjectByName("Point1").children[0];
+            main.light.castShadow = true;
+            main.light = main.scene.getObjectByName("Point2").children[0];
+            main.light.castShadow = true;
+            
 
             gltf.scene.traverse(function (model) {
                 if (model.isMesh && model.name.includes("_cs")) {
