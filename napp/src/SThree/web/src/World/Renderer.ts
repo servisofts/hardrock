@@ -14,7 +14,7 @@ export default class Renderer {
         main.renderer.physicallyCorrectLights = true;
         main.renderer.shadowMap.enabled = true;
         main.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        main.renderer.toneMappingExposure = 0.3;
+        main.renderer.toneMappingExposure = 0.5;
         document.getElementById("three").appendChild(main.renderer.domElement);
 
         main.addToRender('Renderer', this);

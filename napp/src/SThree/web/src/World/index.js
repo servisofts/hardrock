@@ -14,7 +14,7 @@ export default class index extends Component {
         
         new Stats(this);
         new Camera(this);
-        new Helpers(this);
+        // new Helpers(this);
         new Blender(this);
         this.renderer.setAnimationLoop(this.animate.bind(this));
     }
