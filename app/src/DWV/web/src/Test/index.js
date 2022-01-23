@@ -50,6 +50,11 @@ class Test extends Component {
             x: (event.clientX / this.renderer.domElement.clientWidth) * 2 - 1,
             y: -(event.clientY / this.renderer.domElement.clientHeight) * 2 + 1,
         }
+        if(INSTANCE.mixer.actual === "t_front_back"){
+            this.moverse("t_back_menu");
+        }else{
+            this.moverse("t_front_back");
+        }
 
         this.raycaster.setFromCamera(mouse, this.camera);
         const intersects = INSTANCE.raycaster.intersectObjects(INSTANCE.scene.children)
@@ -58,6 +63,21 @@ class Test extends Component {
             var guitarra = intersects.filter(o => o.object.name.includes("Guitarra"));
             console.log(guitarra)
 
+        }
+    }
+
+    moverse(name){
+        const INSTANCE = this;
+        if(INSTANCE.mixer.actions[name]){
+            if(INSTANCE.mixer.actual){
+                INSTANCE.mixer.actions[INSTANCE.mixer.actual].fadeOut(0.2);
+            }
+            INSTANCE.mixer.actual = name;
+            INSTANCE.mixer.actions[name].setLoop(INSTANCE.LoopOnce);
+            INSTANCE.mixer.actions[name].clampWhenFinished = true;
+            INSTANCE.mixer.actions[name].reset()
+            INSTANCE.mixer.actions[name].fadeIn(0.2)
+            INSTANCE.mixer.actions[name].play();
         }
     }
 
@@ -91,6 +111,8 @@ class Test extends Component {
         this.mixers = [];
         // this.createTest();
         this.blender = new Blender(this);
+
+        
 
 
         // const geometry = new THREE.BoxGeometry(5, 5, 5);

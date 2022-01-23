@@ -29,16 +29,21 @@ export default class Blender {
             INSTANCE.ventana.receiveShadow = true;
             INSTANCE.ventana.castShadow = true;
 
-            INSTANCE.mixer.actions = [];
+            INSTANCE.mixer.actions = {};
             for (var i = 0; i < gltf.animations.length; i++) {
                 var action = await INSTANCE.mixer.clipAction(gltf.animations[i]);
-                INSTANCE.mixer.actions.push(action);
+                INSTANCE.mixer.actions[gltf.animations[i].name] = action;
             }
             INSTANCE.mixers.push(INSTANCE.mixer);
+<<<<<<< Updated upstream
 
             INSTANCE.mixer.actions[0].setLoop(INSTANCE.LoopOnce);
             INSTANCE.mixer.actions[0].clampWhenFinished = true;
             // INSTANCE.mixer.actions[0].play();
+=======
+            
+            INSTANCE.moverse("t_front_menu");
+>>>>>>> Stashed changes
 
             INSTANCE.light = INSTANCE.scene.getObjectByName("Light").children[0];
             INSTANCE.light.castShadow = true;
