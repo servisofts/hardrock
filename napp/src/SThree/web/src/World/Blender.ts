@@ -55,10 +55,15 @@ export default class Blender {
             div.innerHTML = html;
             var cssObject = new CSS3DObject(div);
 
-            var scale = 0.001;
-            cssObject.scale.set(scale, scale, scale);
-             cssObject.position.set(main.pantalla.position.x, main.pantalla.position.y, main.pantalla.position.z);
-            // cssObject.rotation.y = main.pantalla.rotation.y;
+            let scale = 0.001;
+            cssObject.scale.set(scale ,scale ,scale);
+            cssObject.position.set(main.pantalla.position.x,main.pantalla.position.y,main.pantalla.position.z);
+            cssObject.rotation.set(main.pantalla.rotation.x,main.pantalla.rotation.y,main.pantalla.rotation.z);
+            //cssObject.position.copy( main.pantalla.position );
+            //cssObject.rotation.copy( main.pantalla.rotation );
+            //cssObject.scale.copy( main.pantalla.scale );
+
+
 
             main.scene.add(cssObject);
 
