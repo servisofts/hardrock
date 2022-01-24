@@ -46,16 +46,16 @@ export default class Blender {
                 action.play();
             }
 
-            main.pantalla = main.scene.getObjectByName("pantalla2");
+            main.pantalla = main.scene.getObjectByName("Pantalla2");
             var html = '<iframe src="https://calisteniabolivia.com" width="100%" height="100%">';
             var div = document.createElement('div');
             div.innerHTML = html;
             var cssObject = new CSS3DObject(div);
 
-            let scale = 0.001;
+            let scale = 0.01;
             cssObject.scale.set(scale ,scale ,scale);
             cssObject.position.set(main.pantalla.position.x,main.pantalla.position.y,main.pantalla.position.z);
-            cssObject.rotation.set(main.pantalla.rotation.x,main.pantalla.rotation.y,main.pantalla.rotation.z);
+            cssObject.rotation.set(main.pantalla.rotation.z, main.pantalla.rotation.y,main.pantalla.rotation.x);
             //cssObject.position.copy( main.pantalla.position );
             //cssObject.rotation.copy( main.pantalla.rotation );
             //cssObject.scale.copy( main.pantalla.scale );
