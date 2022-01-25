@@ -19,11 +19,17 @@ export default class Blender {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         main.gltfLoader.setDRACOLoader(dracoLoader);
         main.gltfLoader.parse(JSON.stringify(home), '', (async (gltf) => {
-            main.test = gltf.scene;
-            main.camera.position.set(0, -10, 1.5);
+            main.sceneHome = gltf.scene;
+            main.scene.remove(main.sceneActual);
+            main.scene.add(main.sceneHome);
+            main.sceneActual = main.sceneHome;
+
+            //main.camera.position.set(0, -10, 1.5);
             // main.test.rotation.x = -Math.PI/2;
-            main.scene.add(main.test);
-            main.light = main.scene.getObjectByName("Luz").children[0];
+
+            main.camera = main.sceneHome.getObjectByName("Camera");
+
+            main.light = main.sceneHome.getObjectByName("Luz").children[0];
             main.light.castShadow = true;
             // main.light = main.scene.getObjectByName("Point1").children[0];
             // main.light.castShadow = true;

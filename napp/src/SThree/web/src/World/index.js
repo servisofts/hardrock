@@ -30,16 +30,15 @@ export default class index extends Component {
         this.renderer.domElement.addEventListener('click', (event) => this.onClick(event), false);
 
         this.scene = new THREE.Scene();
-
-
+        this.sceneActual = new THREE.Scene();
+        this.scene.add(this.sceneActual);
         // this.cssScene = new THREE.Scene();
 
         new Stats(this);
         new Camera(this);
         // new Helpers(this);
-        //new Blender(this);
-        //new Cotizacion(this);
         new Home(this);
+        //new Cotizacion(this);
         this.renderer.setAnimationLoop(this.animate.bind(this));
     }
 
@@ -54,8 +53,13 @@ export default class index extends Component {
 
         if (intersects.length > 0) {
             var letrero = intersects.filter(o => o.object.name.includes("letrero"));
-            console.log(letrero);
-
+            if(letrero.length > 0){
+                new Cotizacion(this);
+            }
+            var loby = intersects.filter(o => o.object.name.includes("loby"));
+            if(loby.length > 0){
+                new Blender(this);
+            }
         }
     }
 

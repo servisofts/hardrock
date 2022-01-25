@@ -19,16 +19,19 @@ export default class Blender {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         main.gltfLoader.setDRACOLoader(dracoLoader);
         main.gltfLoader.parse(JSON.stringify(cotizacion), '', (async (gltf) => {
-            main.test = gltf.scene;
+            main.sceneCotizacion = gltf.scene;
+            main.scene.remove(main.sceneActual);
+            main.scene.add(main.sceneCotizacion);
+            main.sceneActual = main.sceneCotizacion;
+            main.camera = main.sceneCotizacion.getObjectByName("Camera");
             // main.test.rotation.x = -Math.PI/2;
-            main.scene.add(main.test);
+            //main.scene.add(main.sceneCotizacion);
             // main.light = main.scene.getObjectByName("Point").children[0];
             // main.light.castShadow = true;
             // main.light = main.scene.getObjectByName("Point1").children[0];
             // main.light.castShadow = true;
             // main.light = main.scene.getObjectByName("Point2").children[0];
             // main.light.castShadow = true; 
-
 
             gltf.scene.traverse(function (model) {
                 if (model.isMesh && model.name.includes("_cs")) {
@@ -47,13 +50,13 @@ export default class Blender {
                 //action.play();
             }
 
-            main.pantalla = main.scene.getObjectByName("Pantalla");
+            main.sceneCotizacionPantalla = main.sceneCotizacion.getObjectByName("Pantalla");
 
             var material = new THREE.MeshBasicMaterial();
             material.color.set('black')
             material.opacity = 0;
             material.blending = THREE.NoBlending;
-            main.pantalla.material = material;
+            main.sceneCotizacionPantalla.material = material;
             var html = `
             <iframe 
                 width="100%" 
@@ -72,7 +75,7 @@ export default class Blender {
             //     >
             // </iframe>`;
 
-            new HtmlObj(main, main.pantalla, html);
+            new HtmlObj(main, main.sceneCotizacionPantalla, html);
 
             // cssObject.rotation.rotation.x = main.pantalla.rotation.x;
             // cssObject.rotation.rotation.y = main.pantalla.rotation.y;
