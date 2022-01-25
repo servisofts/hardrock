@@ -1,7 +1,7 @@
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import  {CSS3DObject}  from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 import PRUEBA1 from "../../../../Assets/3d/prueba1.json";
 import * as THREE from "three";
@@ -43,24 +43,23 @@ export default class Blender {
                 var action = await this.mixer.clipAction(gltf.animations[i]);
                 // this.mixer.actions[gltf.animations[i].name] = action;
                 this.mixer.actions.push(action);
-                action.play();
+                // action.play();
             }
 
             main.pantalla = main.scene.getObjectByName("Pantalla2");
             var html = '<iframe src="https://calisteniabolivia.com" width="100%" height="100%">';
             var div = document.createElement('div');
+
             div.innerHTML = html;
             var cssObject = new CSS3DObject(div);
 
-            let scale = 0.01;
+            let scale = 0.008;
             cssObject.scale.set(scale ,scale ,scale);
             cssObject.position.set(main.pantalla.position.x,main.pantalla.position.y,main.pantalla.position.z);
-            cssObject.rotation.set(main.pantalla.rotation.z, main.pantalla.rotation.y,main.pantalla.rotation.x);
+            cssObject.rotation.set(0,-0.5,0);
             //cssObject.position.copy( main.pantalla.position );
             //cssObject.rotation.copy( main.pantalla.rotation );
             //cssObject.scale.copy( main.pantalla.scale );
-
-
 
             main.scene.add(cssObject);
 

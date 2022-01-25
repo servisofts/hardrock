@@ -18,10 +18,10 @@ export default class Renderer {
         main.renderer.outputEnconding = THREE.sRGBEncoding;
         main.renderer.setClearColor(0x000000);
 
-        main.renderer.domElement.style.position = 'absolute';
+        // main.renderer.domElement.style.position = 'absolute';
         main.cssRenderer.domElement.style.position = 'absolute';
 
-        main.renderer.domElement.style.top = 0;
+        // main.renderer.domElement.style.top = 0;
         main.cssRenderer.domElement.style.top = 0;
 
 
