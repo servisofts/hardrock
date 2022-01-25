@@ -26,8 +26,8 @@ export default class HtmlObj {
         `;
         var cssObject = new CSS3DObject(div);
         cssObject.scale.set(mesh.scale.x / ampliar, mesh.scale.y / ampliar, mesh.scale.z / ampliar);
-        cssObject.rotation.set(mesh.rotation.x, mesh.rotation.y, main.pantalla.rotation.z);
-        cssObject.position.set(mesh.position.x, mesh.position.y, main.pantalla.position.z);
+        cssObject.rotation.set(mesh.rotation.x, mesh.rotation.y, mesh.rotation.z);
+        cssObject.position.set(mesh.position.x, mesh.position.y, mesh.position.z);
         main.scene.add(cssObject);
         return cssObject;
     }

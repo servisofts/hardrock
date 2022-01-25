@@ -19,15 +19,20 @@ export default class Blender {
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         main.gltfLoader.setDRACOLoader(dracoLoader);
         main.gltfLoader.parse(JSON.stringify(PRUEBA1), '', (async (gltf) => {
-            main.test = gltf.scene;
+            main.sceneBlender = gltf.scene;
+            main.scene.remove(main.sceneActual);
+            main.scene.add(main.sceneBlender);
+            main.sceneActual = main.sceneBlender;
+            main.camera = main.sceneBlender.getObjectByName("Camera");
+
             // main.test.rotation.x = -Math.PI/2;
-            main.scene.add(main.test);
+            // main.scene.add(main.test);
             // main.light = main.scene.getObjectByName("Point").children[0];
             // main.light.castShadow = true;
             // main.light = main.scene.getObjectByName("Point1").children[0];
             // main.light.castShadow = true;
             // main.light = main.scene.getObjectByName("Point2").children[0];
-            // main.light.castShadow = true;
+            // main.light.castShadow = true; 
 
 
             gltf.scene.traverse(function (model) {
@@ -47,13 +52,13 @@ export default class Blender {
                 //action.play();
             }
 
-            main.pantalla = main.scene.getObjectByName("Pantalla2");
+            main.sceneBlenderPantalla = main.sceneBlender.getObjectByName("Pantalla2");
 
             var material = new THREE.MeshBasicMaterial();
             material.color.set('black')
             material.opacity = 0;
             material.blending = THREE.NoBlending;
-            main.pantalla.material = material;
+            main.sceneBlenderPantalla.material = material;
             var html = `
             <iframe 
                 width="100%" 
@@ -72,7 +77,7 @@ export default class Blender {
             //     >
             // </iframe>`;
 
-            new HtmlObj(main, main.pantalla, html);
+            new HtmlObj(main, main.sceneBlenderPantalla, html);
 
             // cssObject.rotation.rotation.x = main.pantalla.rotation.x;
             // cssObject.rotation.rotation.y = main.pantalla.rotation.y;
