@@ -44,7 +44,7 @@ export default class Blender {
                 var action = await this.mixer.clipAction(gltf.animations[i]);
                 // this.mixer.actions[gltf.animations[i].name] = action;
                 this.mixer.actions.push(action);
-                action.play();
+                //action.play();
             }
 
             main.pantalla = main.scene.getObjectByName("Pantalla2");
