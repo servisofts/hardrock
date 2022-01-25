@@ -23,6 +23,7 @@ export default class index extends Component {
         // elem.style.height = '100%';
         new Renderer(this);
         this.scene = new THREE.Scene();
+        // this.cssScene = new THREE.Scene();
 
         new Stats(this);
         new Camera(this);

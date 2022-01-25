@@ -18,10 +18,11 @@ export default class Renderer {
         main.renderer.outputEnconding = THREE.sRGBEncoding;
         main.renderer.setClearColor(0x000000);
 
-        // main.renderer.domElement.style.position = 'absolute';
+        main.renderer.domElement.style.position = 'absolute';
+        main.renderer.domElement.style.pointerEvents = 'none';
         main.cssRenderer.domElement.style.position = 'absolute';
 
-        // main.renderer.domElement.style.top = 0;
+        main.renderer.domElement.style.top = 0;
         main.cssRenderer.domElement.style.top = 0;
 
 
@@ -29,15 +30,18 @@ export default class Renderer {
         main.renderer.shadowMap.enabled = true;
         main.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         main.renderer.toneMappingExposure = 0.5;
+        main.renderer.domElement.zIndex = 1;
         
-        document.getElementById("three").appendChild(main.renderer.domElement);
         document.getElementById("three").appendChild(main.cssRenderer.domElement);
+        document.getElementById("three").appendChild(main.renderer.domElement);
+
 
         main.addToRender('Renderer', this);
     }
 
     resizeCanvasToDisplaySize() {
         this.main.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.main.cssRenderer.setSize(window.innerWidth, window.innerHeight);
         const canvas = this.main.renderer.domElement;
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;

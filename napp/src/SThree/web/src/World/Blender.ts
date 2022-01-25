@@ -1,10 +1,10 @@
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 import PRUEBA1 from "../../../../Assets/3d/prueba1.json";
 import * as THREE from "three";
+import HtmlObj from './HtmlObj';
 
 export default class Blender {
     main;
@@ -20,13 +20,14 @@ export default class Blender {
         main.gltfLoader.setDRACOLoader(dracoLoader);
         main.gltfLoader.parse(JSON.stringify(PRUEBA1), '', (async (gltf) => {
             main.test = gltf.scene;
+            // main.test.rotation.x = -Math.PI/2;
             main.scene.add(main.test);
-            main.light = main.scene.getObjectByName("Point").children[0];
-            main.light.castShadow = true;
-            main.light = main.scene.getObjectByName("Point1").children[0];
-            main.light.castShadow = true;
-            main.light = main.scene.getObjectByName("Point2").children[0];
-            main.light.castShadow = true;
+            // main.light = main.scene.getObjectByName("Point").children[0];
+            // main.light.castShadow = true;
+            // main.light = main.scene.getObjectByName("Point1").children[0];
+            // main.light.castShadow = true;
+            // main.light = main.scene.getObjectByName("Point2").children[0];
+            // main.light.castShadow = true;
 
 
             gltf.scene.traverse(function (model) {
@@ -43,29 +44,40 @@ export default class Blender {
                 var action = await this.mixer.clipAction(gltf.animations[i]);
                 // this.mixer.actions[gltf.animations[i].name] = action;
                 this.mixer.actions.push(action);
-                // action.play();
+                action.play();
             }
 
             main.pantalla = main.scene.getObjectByName("Pantalla2");
-            // var html = '<iframe src="https://calisteniabolivia.com" width="100%" height="100%">';
-            var html = '<img src="https://kolping.servisofts.com/images/usuario/7cbb0808-841a-4213-8842-ff2fe009bf86?date=1642979567879"/>';
-            var div = document.createElement('div');
-            div.style.width = "1";
-            div.style.height = "1";
-            div.innerHTML = html;
-            var cssObject = new CSS3DObject(div);
 
-            let scale = 0.001;
-            cssObject.scale.set(scale ,scale ,scale);
-            cssObject.position.set(main.pantalla.position.x,main.pantalla.position.y,main.pantalla.position.z);
-            cssObject.rotation.set(main.pantalla.rotation.x,main.pantalla.rotation.y,main.pantalla.rotation.z);
-            //cssObject.position.copy( main.pantalla.position );
-            //cssObject.rotation.copy( main.pantalla.rotation );
-            //cssObject.scale.copy( main.pantalla.scale );
+            var material = new THREE.MeshBasicMaterial();
+            material.color.set('black')
+            material.opacity = 0;
+            material.blending = THREE.NoBlending;
+            main.pantalla.material = material;
+            var html = `
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/lDK9QqIzhwk?autoplay=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="autoplay;" 
+                allowfullscreen>
+            </iframe>`;
+            // var html = `
+            // <iframe 
+            //     width="100%" 
+            //     height="100%" 
+            //     src="https://kolping.servisofts.com/" 
+            //     >
+            // </iframe>`;
 
+            new HtmlObj(main, main.pantalla, html);
 
+            // cssObject.rotation.rotation.x = main.pantalla.rotation.x;
+            // cssObject.rotation.rotation.y = main.pantalla.rotation.y;
+            // cssObject.rotation.rotation.z = main.pantalla.rotation.z;
 
-            main.scene.add(cssObject);
 
 
             // this.mixers.push(this.mixer);

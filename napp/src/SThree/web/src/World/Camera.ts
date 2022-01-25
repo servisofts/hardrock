@@ -14,8 +14,8 @@ export default class Camera {
         this.main = main;
         main.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         main.addToRender('Camera', this);
-        main.camera.position.set(0, 1.5, 10);
-        // main.camera.rotation.x = -0.2
+        main.camera.position.set(0, -7, 1.5);
+        main.camera.rotation.x = Math.PI / 360 * 180;
 
         // this.createGUIControls();
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
@@ -33,7 +33,7 @@ export default class Camera {
         cameraFolder.add(this.main.camera.position, 'y', 0, 10)
         cameraFolder.open()
         const cameraRotationFolder = this.gui.addFolder('Camera Rotation')
-        cameraRotationFolder.add(this.main.camera.rotation, 'y', Math.PI * -0.999, Math.PI * 0.999)
+        cameraRotationFolder.add(this.main.camera.rotation, 'x', Math.PI * -1, Math.PI * 1)
         cameraRotationFolder.open()
     }
 
@@ -51,10 +51,10 @@ export default class Camera {
             this.main.camera.rotation.y -= this.props.speedRotation * delta * speed;
         }
         if (this.keystate[38] || this.keystate[87]) {
-            pos.z -= this.props.velocity * delta * speed;
+            pos.y += this.props.velocity * delta * speed;
         }
         if (this.keystate[40] || this.keystate[83]) {
-            pos.z += this.props.velocity * delta * speed;
+            pos.y -= this.props.velocity * delta * speed;
         }
         if (this.keystate[37] || this.keystate[65]) {
             pos.x -= this.props.velocity * delta * speed;

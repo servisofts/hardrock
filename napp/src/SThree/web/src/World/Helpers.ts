@@ -11,7 +11,7 @@ export default class Helpers {
         // const gridHelper = new THREE.GridHelper(20, 20);
         // main.scene.add(gridHelper); 
 
-        const axesHelper = new THREE.AxesHelper(1);
+        const axesHelper = new THREE.AxesHelper(20);
         main.scene.add(axesHelper);
     }
 
