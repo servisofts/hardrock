@@ -19,7 +19,7 @@ export default class Renderer {
         main.renderer.setClearColor(0x000000);
 
         main.renderer.domElement.style.position = 'absolute';
-        main.renderer.domElement.style.pointerEvents = 'none';
+        //main.renderer.domElement.style.pointerEvents = 'none';
         main.cssRenderer.domElement.style.position = 'absolute';
 
         main.renderer.domElement.style.top = 0;
@@ -34,7 +34,6 @@ export default class Renderer {
         
         document.getElementById("three").appendChild(main.cssRenderer.domElement);
         document.getElementById("three").appendChild(main.renderer.domElement);
-
 
         main.addToRender('Renderer', this);
     }
