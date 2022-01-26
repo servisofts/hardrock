@@ -47,8 +47,8 @@ export default class index extends Component {
         new Stats(this);
         new Camera(this);
         // new Helpers(this);
-        new Home(this);
-        // new Cotizacion(this);
+        //new Home(this);
+         new Cotizacion(this);
         this.renderer.setAnimationLoop(this.animate.bind(this));
     }
 
