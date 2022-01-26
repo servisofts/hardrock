@@ -12,9 +12,8 @@ export default class Blender {
     constructor(main) {
         this.main = main;
         this.mixer = new THREE.AnimationMixer(main.scene);
-
         //INITIALIZE LOADERS
-        main.gltfLoader = new GLTFLoader();
+        main.gltfLoader = new GLTFLoader(main.loadingManager);
         var dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         main.gltfLoader.setDRACOLoader(dracoLoader);
@@ -24,74 +23,57 @@ export default class Blender {
             main.scene.add(main.sceneCotizacion);
             main.sceneActual = main.sceneCotizacion;
             main.camera = main.sceneCotizacion.getObjectByName("Camera");
-            // main.test.rotation.x = -Math.PI/2;
-            //main.scene.add(main.sceneCotizacion);
-            // main.light = main.scene.getObjectByName("Point").children[0];
-            // main.light.castShadow = true;
-            // main.light = main.scene.getObjectByName("Point1").children[0];
-            // main.light.castShadow = true;
-            // main.light = main.scene.getObjectByName("Point2").children[0];
-            // main.light.castShadow = true; 
-
             gltf.scene.traverse(function (model) {
-                if (model.isMesh && model.name.includes("_cs")) {
+                if (model.isLight) {
+                    model.castShadow = true
+                    model.power = model.power*0.5;
+                };
+
+                if (model.name.includes("_cs")) {
                     model.castShadow = true;
                 }
-                if (model.isMesh && model.name.includes("_rs")) {
+                if (model.name.includes("_rs")) {
                     model.receiveShadow = true;
                 }
             });
-
             this.mixer.actions = [];
             for (var i = 0; i < gltf.animations.length; i++) {
                 var action = await this.mixer.clipAction(gltf.animations[i]);
-                // this.mixer.actions[gltf.animations[i].name] = action;
                 this.mixer.actions.push(action);
-                //action.play();
+                if (gltf.animations[i].name.indexOf("_nr") > -1) {
+                    action.setLoop(THREE.LoopOnce);
+                    action.clampWhenFinished = true;
+                }
+                if (gltf.animations[i].name.indexOf("_ns") < 0) {
+                    action.play();
+                }
+                // console.log(gltf.animations[i]);
             }
 
             main.sceneCotizacionPantalla = main.sceneCotizacion.getObjectByName("Pantalla");
-
             var material = new THREE.MeshBasicMaterial();
             material.color.set('black')
             material.opacity = 0;
             material.blending = THREE.NoBlending;
             main.sceneCotizacionPantalla.material = material;
-            var html = `
-            <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/lDK9QqIzhwk?autoplay=1" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="autoplay;" 
-                allowfullscreen>
-            </iframe>`;
             // var html = `
             // <iframe 
             //     width="100%" 
             //     height="100%" 
-            //     src="https://kolping.servisofts.com/" 
-            //     >
-            // </iframe>`;
+            //     src="https://www.youtube.com/embed/lDK9QqIzhwk?autoplay=1" 
+            //     title="YouTube video player" 
+            //     frameborder="0" 
+            //     allow="autoplay;" 
+            //     allowfullscreen>
+            // </iframe>`;D
+      
+            var html = `
+           <div>
+            <h1 style="color:#fff;">Test</h1>
+           </div>
+           `;
 
             new HtmlObj(main, main.sceneCotizacionPantalla, html);
-
-            // cssObject.rotation.rotation.x = main.pantalla.rotation.x;
-            // cssObject.rotation.rotation.y = main.pantalla.rotation.y;
-            // cssObject.rotation.rotation.z = main.pantalla.rotation.z;
-
-
-
-            // this.mixers.push(this.mixer);
-
-            // this.mixer[0].setLoop(THREE.LoopOnce);
-            // this.mixer[0].clampWhenFinished = true;
-            // INSTANCE.mixer.actions[0].play();
-            // main.piso = main.scene.getObjectByName("Piso");
-            // main.piso.receiveShadow = true;
-            // main.piso.castShadowq = true;
-
         }).bind(this), undefined, function (error) {
             console.log(error.message);
             console.log(error.stack);

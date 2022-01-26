@@ -25,8 +25,18 @@ export default class index extends Component {
         // elem.style.height = '100%';
         new Renderer(this);
 
+        this.loadingManager = new THREE.LoadingManager();
+        this.loadingManager.onProgress = function (item, loaded, total) {
+            document.getElementById("loadingWindow").style.visibility  = "visible";
+            console.log(loaded, total);
+        };
+        this.loadingManager.onLoad = function () {
+            document.getElementById("loadingWindow").style.visibility = "hidden";
+            console.log("loaded all resources");
+        };
+
         this.raycaster = new THREE.Raycaster();
-        
+
         this.renderer.domElement.addEventListener('click', (event) => this.onClick(event), false);
 
         this.scene = new THREE.Scene();
@@ -38,26 +48,26 @@ export default class index extends Component {
         new Camera(this);
         // new Helpers(this);
         new Home(this);
-        //new Cotizacion(this);
+        // new Cotizacion(this);
         this.renderer.setAnimationLoop(this.animate.bind(this));
     }
 
-    onClick(event){
+    onClick(event) {
         const mouse = {
             x: (event.clientX / this.renderer.domElement.clientWidth) * 2 - 1,
             y: -(event.clientY / this.renderer.domElement.clientHeight) * 2 + 1,
         }
-        
+
         this.raycaster.setFromCamera(mouse, this.camera);
         const intersects = this.raycaster.intersectObjects(this.scene.children)
 
         if (intersects.length > 0) {
             var letrero = intersects.filter(o => o.object.name.includes("letrero"));
-            if(letrero.length > 0){
+            if (letrero.length > 0) {
                 new Cotizacion(this);
             }
             var loby = intersects.filter(o => o.object.name.includes("loby"));
-            if(loby.length > 0){
+            if (loby.length > 0) {
                 new Blender(this);
             }
         }
@@ -76,5 +86,19 @@ export default class index extends Component {
         this.cssRenderer.render(this.scene, this.camera);
     }
 
-    render() { return <div id="three" /> }
+    render() {
+        return <><div id="three" />
+            <div
+                id="loadingWindow"
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#000",
+                    visibility: "visible",
+                }}></div>
+        </>
+    }
 }

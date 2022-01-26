@@ -14,7 +14,7 @@ export default class Blender {
         this.mixer = new THREE.AnimationMixer(main.scene);
 
         //INITIALIZE LOADERS
-        main.gltfLoader = new GLTFLoader();
+        main.gltfLoader = new GLTFLoader(main.loadingManager);
         var dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('three/examples/js/libs/draco/');
         main.gltfLoader.setDRACOLoader(dracoLoader);
@@ -36,6 +36,11 @@ export default class Blender {
 
 
             gltf.scene.traverse(function (model) {
+                if (model.isLight) {
+                    model.castShadow = true
+                    // model.intensity = model.intensity;
+                    model.power = model.power*0.5;
+                };
                 if (model.isMesh && model.name.includes("_cs")) {
                     model.castShadow = true;
                 }
@@ -96,7 +101,7 @@ export default class Blender {
 
         }).bind(this), undefined, function (error) {
             console.log(error.message);
-            console.log(error.stack);
+            console.log(error.stack);   
         });
 
 

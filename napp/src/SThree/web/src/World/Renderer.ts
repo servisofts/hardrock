@@ -1,16 +1,32 @@
 import * as THREE from "three";
-import  {CSS3DRenderer}  from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 export default class Renderer {
     main;
+
+    resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const pixelRatio = window.devicePixelRatio;
+        const width = canvas.clientWidth * pixelRatio | 0;
+        const height = canvas.clientHeight * pixelRatio | 0;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setPixelRatio(1.1);
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
     constructor(main) {
         this.main = main;
         main.clock = new THREE.Clock();
         main.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         main.cssRenderer = new CSS3DRenderer();
 
-        main.renderer.setPixelRatio(window.devicePixelRatio);
-        //main.cssRenderer.setPixelRatio(window.devicePixelRatio);
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent)) {
+            this.resizeRendererToDisplaySize(main.renderer);
+        } else {
+            main.renderer.setPixelRatio(window.devicePixelRatio);
+        }
 
         main.renderer.setSize(window.innerWidth, window.innerHeight);
         main.cssRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -29,9 +45,12 @@ export default class Renderer {
         main.renderer.physicallyCorrectLights = true;
         main.renderer.shadowMap.enabled = true;
         main.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        main.renderer.toneMappingExposure = 0.5;
+        main.renderer.toneMappingExposure = 1;
+
+
+
         main.renderer.domElement.zIndex = 1;
-        
+
         document.getElementById("three").appendChild(main.cssRenderer.domElement);
         document.getElementById("three").appendChild(main.renderer.domElement);
 
@@ -48,7 +67,7 @@ export default class Renderer {
         this.main.camera.aspect = width / height;
         this.main.camera.updateProjectionMatrix();
     }
-    render(){
+    render() {
         this.resizeCanvasToDisplaySize();
     }
 }
