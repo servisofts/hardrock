@@ -7,27 +7,17 @@ import Helpers from "./Helpers";
 import Home from "./Home";
 import Renderer from "./Renderer";
 import Stats from "./Stats";
+import Tecnologias from "./Tecnologias";
+import PruebaFisicas from "./PruebaFisicas";
 
 export default class index extends Component {
     ITEMS_TO_RENDER = {};
     componentDidMount() {
-        // var elem = document.getElementById("three");
-        // if (elem.requestFullscreen) {
-        //     elem.requestFullscreen();
-        // } else if (elem.mozRequestFullScreen) { /* Firefox */
-        //     elem.mozRequestFullScreen();
-        // } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-        //     elem.webkitRequestFullscreen();
-        // } else if (elem.msRequestFullscreen) { /* IE/Edge */
-        //     elem.msRequestFullscreen();
-        // }
-        // elem.style.width = '100%';
-        // elem.style.height = '100%';
-        new Renderer(this);
 
+        new Renderer(this);
         this.loadingManager = new THREE.LoadingManager();
         this.loadingManager.onProgress = function (item, loaded, total) {
-            document.getElementById("loadingWindow").style.visibility  = "visible";
+            document.getElementById("loadingWindow").style.visibility = "visible";
             console.log(loaded, total);
         };
         this.loadingManager.onLoad = function () {
@@ -42,12 +32,15 @@ export default class index extends Component {
         this.scene = new THREE.Scene();
         this.sceneActual = new THREE.Scene();
         this.scene.add(this.sceneActual);
+
         // this.cssScene = new THREE.Scene();
 
         new Stats(this);
         new Camera(this);
         // new Helpers(this);
-        //new Home(this);
+        // new Home(this);
+        // new PruebaFisicas(this);
+        // new Tecnologias(this);
          new Cotizacion(this);
         this.renderer.setAnimationLoop(this.animate.bind(this));
     }

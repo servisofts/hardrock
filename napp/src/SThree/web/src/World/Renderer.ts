@@ -11,7 +11,7 @@ export default class Renderer {
         const height = canvas.clientHeight * pixelRatio | 0;
         const needResize = canvas.width !== width || canvas.height !== height;
         if (needResize) {
-            renderer.setPixelRatio(1.1);
+            renderer.setPixelRatio(0.8);
             renderer.setSize(width, height, false);
         }
         return needResize;
@@ -25,7 +25,7 @@ export default class Renderer {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent)) {
             this.resizeRendererToDisplaySize(main.renderer);
         } else {
-            //main.renderer.setPixelRatio(window.devicePixelRatio);
+            // main.renderer.setPixelRatio(window.devicePixelRatio);
             main.renderer.setPixelRatio(0.8);
         }
 
@@ -45,6 +45,10 @@ export default class Renderer {
 
         main.renderer.physicallyCorrectLights = true;
         main.renderer.shadowMap.enabled = true;
+        main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        main.renderer.shadowMap.renderReverseSided = false;
+
+
         main.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         main.renderer.toneMappingExposure = 1;
 
@@ -59,12 +63,14 @@ export default class Renderer {
     }
 
     resizeCanvasToDisplaySize() {
-        this.main.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.main.cssRenderer.setSize(window.innerWidth, window.innerHeight);
+        // this.main.renderer.setSize(window.innerWidth, window.innerHeight);
         const canvas = this.main.renderer.domElement;
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
         this.main.renderer.setSize(width, height, false);
+        this.main.cssRenderer.setSize(width, height);
         this.main.camera.aspect = width / height;
         this.main.camera.updateProjectionMatrix();
     }

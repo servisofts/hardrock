@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var triangle = {
+            a: { x: 1, y: 1, z: 1, },
+            b: { x: 3, y: 4, z: 3, },
+            c: { x: 4, y: 2, z: 2, }
+        }
+        const distanciaEntrePuntos = (a, b) => {
+            return parseFloat(Math.sqrt(Math.pow((a.x - b.x), 2) + Math.pow((a.y - b.y), 2)).toFixed(2));
+        }
+        let da = distanciaEntrePuntos(triangle.a, { x: 2, y: 2 })
+        let db = distanciaEntrePuntos(triangle.b, { x: 2, y: 2 })
+        let dc = distanciaEntrePuntos(triangle.c, { x: 2, y: 2 })
+        var total = da + db + dc;
+        var pca = da / total;
+        var pcb = db / total;
+        var pcc = dc / total;
+        var z = (pca * triangle.a.z) + (pcb * triangle.b.z) + (pcc * triangle.c.z) / 3;
+        console.log(z);
+        // var triangle = {
+        //     a: { x: 1, y: -2, z: -4, },
+        //     b: { x: 3, y: 1, z: -3, },
+        //     c: { x: 5, y: 1, z: -7, }
+        // }
+
+
+    </script>
+</body>
+
+</html>

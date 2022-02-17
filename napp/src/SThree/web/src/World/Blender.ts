@@ -54,7 +54,7 @@ export default class Blender {
                 var action = await this.mixer.clipAction(gltf.animations[i]);
                 // this.mixer.actions[gltf.animations[i].name] = action;
                 this.mixer.actions.push(action);
-                //action.play();
+                action.play();
             }
 
             main.sceneBlenderPantalla = main.sceneBlender.getObjectByName("Pantalla2");
@@ -82,7 +82,7 @@ export default class Blender {
             //     >
             // </iframe>`;
 
-            new HtmlObj(main, main.sceneBlenderPantalla, html);
+            new HtmlObj(main, main.sceneBlenderPantalla, html, { width:1024, height:768 });
 
             // cssObject.rotation.rotation.x = main.pantalla.rotation.x;
             // cssObject.rotation.rotation.y = main.pantalla.rotation.y;

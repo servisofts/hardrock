@@ -1,10 +1,11 @@
 import * as THREE from "three";
 import { GUI } from 'dat.gui'
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 export default class Camera {
     props = {
-        velocity: 2,
-        speedRun: 3,
+        velocity: 3,
+        speedRun: 5,
         speedRotation: 0.5
     }
     main;
@@ -17,9 +18,17 @@ export default class Camera {
         main.camera.position.set(0, 2, 1.5);
         main.camera.rotation.x = Math.PI / 360 * 180;
 
-        // this.createGUIControls();
+        // main.control.enabled = true;
+        const click = () => {
+            main.controls.isLocked = true;
+            main.controls.lock();
+        }
+        // document.addEventListener('click', click, false);
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
         document.addEventListener('keyup', this.onKeyUp.bind(this), false);
+        // this.createGUIControls();
+        // document.addEventListener('keydown', this.onKeyDown.bind(this), false);
+        // document.addEventListener('keyup', this.onKeyUp.bind(this), false);
     }
     onKeyDown(evt) {
         this.keystate[evt.keyCode] = true;
@@ -51,18 +60,27 @@ export default class Camera {
             this.main.camera.rotation.y -= this.props.speedRotation * delta * speed;
         }
         if (this.keystate[38] || this.keystate[87]) {
-            pos.y += this.props.velocity * delta * speed;
+            this.main.camera.translateZ(-this.props.velocity * delta * speed);
+            // pos.y = this.props.velocity * delta * speed;
+            // this.main.controls.moveForward(this.props.velocity * delta * speed);
         }
         if (this.keystate[40] || this.keystate[83]) {
-            pos.y -= this.props.velocity * delta * speed;
+            this.main.camera.translateZ(this.props.velocity * delta * speed);
+
+            // pos.y -= this.props.velocity * delta * speed;
+            // this.main.controls.moveForward(this.props.velocity * delta * speed);
         }
         if (this.keystate[37] || this.keystate[65]) {
-            pos.x -= this.props.velocity * delta * speed;
+            this.main.camera.translateX(-this.props.velocity * delta * speed);
+            // pos.x -= this.props.velocity * delta * speed;
+            // this.main.controls.moveRight(this.props.velocity * delta * speed);
         }
         if (this.keystate[39] || this.keystate[68]) {
-            pos.x += this.props.velocity * delta * speed;
+            this.main.camera.translateX(this.props.velocity * delta * speed);
+            // this.main.controls.moveRight(this.props.velocity * delta * speed);
+            // pos.x += this.props.velocity * delta * speed;
         }
-        this.main.camera.position.set(pos.x, pos.y, pos.z);
+        // this.main.camera.position.set(pos.x, pos.y, pos.z);
 
     }
 }

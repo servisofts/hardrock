@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var triangle = {
+        //     a: { x: 1, y: 1, z: 1, },
+        //     b: { x: 3, y: 4, z: 3, },
+        //     c: { x: 4, y: 2, z: 2, }
+        // }
+        var triangle = {
+            a: { x: 1, y: -2, z: -4, },
+            b: { x: 3, y: 1, z: -3, },
+            c: { x: 5, y: 1, z: -7, }
+        }
+
+        // ---- AC
+        var AC = {
+            x: triangle.c.x - triangle.a.x,
+            y: triangle.c.y - triangle.a.y,
+            z: triangle.c.z - triangle.a.z
+        }
+        console.log("AC")
+        console.log(AC)
+
+        // ----BH
+        var BH = {
+            x: triangle.a.x - triangle.b.x,
+            y: triangle.a.y - triangle.b.y,
+            z: triangle.a.z - triangle.b.z
+        }
+        console.log("BH")
+        console.log(BH)
+
+
+        //-- Producto Scalar;
+        var PS = {
+            x: AC.x * BH.x,
+            xt: AC.x * AC.x,
+            y: AC.y * BH.y,
+            yt: AC.y * AC.y,
+            z: AC.z * BH.z,
+            zt: AC.z * AC.z,
+        }
+        console.log("PRODUCTO SCALAR")
+        console.log(PS)
+
+        var t = ((PS.x + PS.y + PS.z) * -1) / (PS.xt + PS.yt + PS.zt)
+        console.log("T")
+        console.log(t)
+
+        var AF = {
+            x: triangle.b.x,
+            xr: (AC.x * t) + BH.x,
+            y: triangle.b.y,
+            yr: (AC.y * t) + BH.y,
+            z: triangle.b.z,
+            zr: (AC.z * t) + BH.z
+        }
+        console.log("AF")
+        console.log(AF)
+    </script>
+</body>
+
+</html>
