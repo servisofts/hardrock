@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Guitarra from "./src/Guitarra";
+// import Guitarra from "./src/Guitarra";
 import Test from "./src/Test";
 export default class App extends Component {
   constructor(props) {
@@ -17,10 +17,11 @@ export default class App extends Component {
   }
   render() {
     return (
-      // <Guitarra />
-      <Test />
+      // <h1>Hola</h1>
+    //  <Guitarra />
+     <Test />
     )
   }
 }
-// const rootElement = document.getElementById("root2");
+// const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);

@@ -37,7 +37,7 @@ export default class Guitarra extends Component {
         //this.createGuitarra();
         //this.createTablero();
         //this.createUntitled();
-        this.createHardRock();
+        //this.createHardRock();
         //this.createHDR();
 
         // this.animate();

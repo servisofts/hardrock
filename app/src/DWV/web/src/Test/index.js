@@ -24,6 +24,10 @@ class Test extends Component {
     }
     createCamera() {
         this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera.position.x=0;
+        this.camera.position.y=5;
+        this.camera.position.z=50;
+        
     }
     createStats() {
         const INSTANCE = this;
@@ -96,10 +100,10 @@ class Test extends Component {
         this.renderer.domElement.addEventListener('click', (event) => this.onClick(event), false)
 
 
-        // var light = new THREE.AmbientLight(0xffffff, 1.5);
-        // this.scene.add(light);
-        // const gridHelper = new THREE.GridHelper(200, 200);
-        // this.scene.add(gridHelper);
+        var light = new THREE.AmbientLight(0xffffff, 1.5);
+        this.scene.add(light);
+        const gridHelper = new THREE.GridHelper(200, 200);
+        this.scene.add(gridHelper);
         // const gridHelper2 = new THREE.GridHelper(200, 200);
         // gridHelper2.rotation.x = Math.PI / 2;
         // this.scene.add(gridHelper2);
@@ -110,15 +114,15 @@ class Test extends Component {
         this.mixer = new THREE.AnimationMixer(this.scene);
         this.mixers = [];
         // this.createTest();
-        this.blender = new Blender(this);
+        // this.blender = new Blender(this);
 
         
 
 
-        // const geometry = new THREE.BoxGeometry(5, 5, 5);
-        // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        // const cube = new THREE.Mesh(geometry, material);
-        // this.scene.add(cube);
+        const geometry = new THREE.BoxGeometry(20, 2, 20);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        this.scene.add(cube);
 
         this.createStats();
 
@@ -130,7 +134,7 @@ class Test extends Component {
             this.mixers.forEach((mixer) => {
                 mixer.update(this.clock.getDelta());
             });
-            this.blender.render();
+            // this.blender.render();
             this.renderer.render(this.scene, this.camera);
             this.stats.update();
         }

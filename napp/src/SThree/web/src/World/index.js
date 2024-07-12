@@ -35,7 +35,7 @@ export default class index extends Component {
 
         // this.cssScene = new THREE.Scene();
 
-        new Stats(this);
+        // new Stats(this);
         new Camera(this);
         // new Helpers(this);
         // new Home(this);

@@ -80,26 +80,26 @@ export default class Blender {
         main.addToRender('Blender', this);
     }
 
-    createPantallas(main) {
-        main.sceneCotizacionPantalla1 = main.sceneCotizacion.getObjectByName("Pantalla_1");
-        main.sceneCotizacionPantalla2 = main.sceneCotizacion.getObjectByName("Pantalla_2");
-        main.sceneCotizacionPantalla3 = main.sceneCotizacion.getObjectByName("Pantalla_3");
+    loadDisplay(main, name, url) {
+        // main["sceneCotizacion_" + name] = main.sceneCotizacion.getObjectByName(name);
+        var pantalla = main.sceneCotizacion.getObjectByName(name);
         var material = new THREE.MeshBasicMaterial();
         material.color.set('black')
         material.opacity = 0;
         material.blending = THREE.NoBlending;
-        main.sceneCotizacionPantalla1.material = material;
-        main.sceneCotizacionPantalla2.material = material;
-        main.sceneCotizacionPantalla3.material = material;
-        var autoPlay = 0;
-        var html1 = `<iframe width="100%" height="100%" src="https://kolping.servisofts.com" ></iframe>`;
-        var html2 = `<iframe width="100%" height="100%" src="https://calistenia.servisofts.com"></iframe>`;
-        var html3 = `<iframe width="100%" height="100%" src="https://fullparts.servisofts.com"></iframe>`;
-        // var html3 = `<iframe width="100%" height="100%" src=""></iframe>`;
-        // new HtmlObj(main, main.sceneCotizacionPantalla1, html1, { width: 411, height: 823 });
-        new HtmlObj(main, main.sceneCotizacionPantalla2, html2, { width: 411, height: 823 });
-        new HtmlObj(main, main.sceneCotizacionPantalla3, html3, { width: 411, height: 823 });
-
+        pantalla.material = material;
+        var html1 = `<iframe width="100%" height="100%" src="${url}" ></iframe>`;
+        new HtmlObj(main, pantalla, html1, { width: 411, height: 823 });
+    }
+    createPantallas(main) {
+        this.loadDisplay(main, "Pantalla_1", "https://tapekeapp.com")
+        this.loadDisplay(main, "Pantalla_2", "https://calistenia.servisofts.com")
+        this.loadDisplay(main, "Pantalla_3", "https://fullparts.servisofts.com")
+        this.loadDisplay(main, "Pantalla_4", "https://www.npmjs.com/package/servisofts-component")
+        this.loadDisplay(main, "Pantalla_5", "https://kolping.servisofts.com")
+        this.loadDisplay(main, "Pantalla_6", "https://fullparts.servisofts.com")
+        this.loadDisplay(main, "Pantalla_7", "https://motonet.servisofts.com")
+        this.loadDisplay(main, "Pantalla_8", "https://motonet.servisofts.com")
     }
     render() {
         if (this.mixer) {

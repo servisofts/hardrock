@@ -24,7 +24,6 @@ class DWV extends Component {
         return (
             <WebView
                 // app={webApp}
-
                 scrollEnabled={false}
                 pagingEnabled={false}
                 allowFileAccessFromFileURLs={true}
